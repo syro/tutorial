@@ -1,0 +1,53 @@
+<h1>13. Directory layout</h1>
+
+<p>
+  We have covered most of what Syro does. Here I wanted to share
+  with you some ideas about the directory layout for a project.
+</p>
+
+<pre>
+  .env      <span># Environment variables</span>
+  .gems     <span># Dependencies</span>
+  LICENSE   <span># Full text of the project's license</span>
+  README.md <span># Information about the project</span>
+  app.rb    <span># Top level Syro application</span>
+  bin/      <span># Executable files</span>
+  config.ru <span># Rack's entry point, it loads ./app.rb</span>
+  decks/    <span># Custom decks</span>
+  doc/      <span># Documentation</span>
+  filters/  <span># Validation filters</span>
+  lib/      <span># Libraries</span>
+  mails/    <span># Templates for emails</span>
+  makefile  <span># make server; make console; make tests</span>
+  models/   <span># Models</span>
+  public/   <span># Static files</span>
+  routes/   <span># Syro apps that will be mounted</span>
+  services/ <span># Service objects</span>
+  test/     <span># Test files</span>
+  views/    <span># Templates for views</span>
+</pre>
+
+<p>
+  Some recommended libraries:
+</p>
+
+<ul>
+  <li><a href="https://github.com/soveran/mote">Mote</a>: template engine</li>
+  <li><a href="https://github.com/djanowski/cutest">Cutest</a>: testing framework</li>
+  <li><a href="https://github.com/cyx/malone">Malone</a>: mailing over SMTP</li>
+  <li><a href="http://ohm.keyvalue.org/">Ohm</a>: object-hash mapper for Redis</li>
+  <li><a href="https://github.com/cyx/shield">Shield</a>: authentication</li>
+</ul>
+
+<p>
+  If you want to know more, check the <a
+  href="https://github.com/soveran/syro-demo">demo application</a>.
+  It provides some basic features common to most applications, like
+  sending emails, rendering templates and account management.
+</p>
+
+<p>
+  I hope you enjoyed the tutorial. <a href="http://soveran.com">Contact
+  me</a> if you have any suggestion or if you want me to clarify
+  something. Thanks a lot for reading!
+</p>

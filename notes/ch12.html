@@ -1,0 +1,32 @@
+<h1>12. Running a webserver</h1>
+
+<p>
+  Finally, we will be able to see our application in the browser.
+  Save the following code to <code>config.ru</code>:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    get {
+      res.write <span>"hello, world"</span>
+    }
+  }
+
+  run(app)
+</pre>
+
+<p>
+  Start the server with the following command:
+</p>
+
+<pre>
+  $ rackup
+</pre>
+
+<p>
+  Now, point your browser to <code>http://localhost:9292</code>.
+</p>
+
+<p><a href="ch13.html">Continue to Chapter 13</a></p>

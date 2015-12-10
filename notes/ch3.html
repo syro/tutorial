@@ -1,0 +1,71 @@
+<h1>3. Capturing path segments</h1>
+
+<p>
+  In the <a href="ch2.html">previous chapter</a> we discovered how
+  to match path segments with the <code>on</code> method. Now we
+  will see how to capture the value of a segment and store it in a
+  hash called <code>inbox</code> for later use.
+</p>
+
+<p>
+  Let's consider this value for <code>PATH_INFO</code>:
+</p>
+
+<pre>
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/posts/42"</span>,
+  }
+</pre>
+
+<p>
+  Here's the code to match the segment <code>"posts"</code> and
+  capture the segment <code>"42"</code>:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    on(<span>"posts"</span>) {
+      on(<var>:post_id</var>) {
+        get {
+          res.write <span>"GET /posts/#{</span>inbox[<var>:post_id</var>]<span>}"</span>
+        }
+      }
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/posts/42"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Run the code and you will get this output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"13"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"GET /posts/42"</span>]]
+</pre>
+
+<p>
+  The captured value gets stored in the <code>inbox</code> hash
+  under the key passed to <code>on</code>.
+</p>
+
+<h2>Exercise</h2>
+
+<p>
+  Change the value of <code>PATH_INFO</code> to
+  <code>"/posts/42/comments"</code> and modify the calls to
+  <code>on</code> to match each segment.
+</p>
+
+<p><a href="ch4.html">Continue to Chapter 4</a></p>

@@ -1,0 +1,57 @@
+<h1>4. Matching booleans</h1>
+
+<p>
+  So far we have learned how to <a href="ch2.html">match path
+  segments</a> with the <code>on</code> method by passing a string,
+  and how to <a href="ch3.html">capture path segments</a> by passing
+  a symbol. The last use case for <code>on</code> is to evaluate
+  the argument as a boolean, and run the block only if the argument
+  is <code>true</code>. Note that I didn't say "truthy": the argument
+  has to be equal to <code>true</code>, and anything else will
+  evaluate to <code>false</code>
+</p>
+
+<p>
+  In the following example, the block will be executed only if the
+  visitor arrived from a different website:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    on(env[<span>"HTTP_REFERER"</span>] != <span>""</span>) {
+      get {
+        res.write <span>"HTTP_REFERER => #{</span>env[<span>"HTTP_REFERER"</span>]<span>}"</span>
+      }
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"HTTP_REFERER"</span>   => <span>"http://example.com"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Run the code and you will get this output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"34"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"HTTP_REFERER => http://example.com"</span>]]
+</pre>
+
+<h2>Exercise</h2>
+
+<p>
+  Combine different matchers, nest them, and modify the <code>env</code>
+  variable to get familiar with this approach of building applications.
+</p>
+
+<p><a href="ch5.html">Continue to Chapter 5</a></p>

@@ -1,0 +1,110 @@
+<h1>2. Matching path segments</h1>
+
+<p>
+  In the tradition of libraries like Cuba and Rum, Syro lets you
+  match segments of the path. Consider this example:
+</p>
+
+<pre>
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/foo/bar/baz"</span>,
+  }
+</pre>
+
+<p>
+  In the example <code>env</code> hash, <code>foo</code>,
+  <code>bar</code> and <code>baz</code> are what we call segments.
+  Let's see how we can match those segments in our app:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    get {
+      res.write <span>"GET /"</span>
+    }
+
+    on(<span>"foo/bar/baz"</span>) {
+      get {
+        res.write <span>"GET /foo/bar/baz"</span>
+      }
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/foo/bar/baz"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Run the code and you will get this output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"16"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"GET /foo/bar/baz"</span>]]
+</pre>
+
+<p>
+  Note that we use <code>get</code> to indicate that we are targetting
+  the <code>"GET"</code> request method, but also that there are
+  no segments left to be matched. For example, the first call to
+  <code>get</code> does not trigger the execution of the block,
+  because at that point the path still contains the
+  <code>"foo/bar/baz"</code> segments. Only once <code>on</code>
+  matches those segments we reach the end of the path, and the
+  nested <code>get</code> matches.
+</p>
+
+<p>
+  We can also match each segment individually by nesting calls to
+  <code>on</code>:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    get {
+      res.write <span>"GET /"</span>
+    }
+
+    on(<span>"foo"</span>) {
+      on(<span>"bar"</span>) {
+        on(<span>"baz"</span>) {
+          get {
+            res.write <span>"GET /foo/bar/baz"</span>
+          }
+        }
+      }
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/foo/bar/baz"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  If you run the program, the result will be the same as before.
+</p>
+
+<h2>Exercise</h2>
+
+<p>
+  Change the value of <code>PATH_INFO</code> and run the program
+  again. Does it work as expected? Adapt the calls to <code>on</code>
+  to match the new value for <code>PATH_INFO</code>.
+</p>
+
+<p><a href="ch3.html">Continue to Chapter 3</a></p>

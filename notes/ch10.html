@@ -1,0 +1,170 @@
+<h1>10. Customizations</h1>
+
+<p>
+  Every Syro application we have developed so far is evaluated in
+  the context of an instance of <code>Syro::Deck</code>. That class
+  provides all the methods we have seen so far (i.e., <code>on</code>,
+  <code>root</code>, <code>run</code>, <code>inbox</code>,
+  <code>get</code>, <code>put</code>, <code>post</code>,
+  <code>patch</code>, <code>delete</code>, <code>res</code> and
+  <code>req</code>).
+</p>
+
+<p>
+  You can create your own Decks and add some methods of your own:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+  require <span>"json"</span>
+
+  class API < Syro::Deck
+    def json(object)
+      res.headers[<span>"Content-Type"</span>] = <span>"application/json"</span>
+      res.write JSON.dump(object)
+    end
+  end
+
+  app = Syro.new(API) {
+    get {
+      json(<var>result:</var> true)
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Type"</span>=><span>"application/json"</span>,
+    <span>"Content-Length"</span>=><span>"15"</span>},
+   [<span>"{\"result\":true}"</span>]]
+</pre>
+
+<p>
+  If you need a JSON API, that's more or less the way to go.
+</p>
+
+<h2>Default headers</h2>
+
+<p>
+  You can configure the default headers for your application by
+  redefining the <code>default_headers</code> method. Here's a new
+  version of the <code>API</code> Deck.
+</p>
+
+<pre>
+  require <span>"syro"</span>
+  require <span>"json"</span>
+
+  class API < Syro::Deck
+    def default_headers
+      { <span>"Content-Type"</span> => <span>"application/json"</span> }
+    end
+
+    def json(object)
+      res.write JSON.dump(object)
+    end
+  end
+
+  app = Syro.new(API) {
+    get {
+      json(<var>result:</var> true)
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Type"</span>=><span>"application/json"</span>,
+    <span>"Content-Length"</span>=><span>"15"</span>},
+   [<span>"{\"result\":true}"</span>]]
+</pre>
+
+<p>
+  The result is the same as before, but instead of setting the JSON
+  header each time you call <code>json</code>, you configure it
+  once and for all.
+</p>
+
+<h2>Custom Response and Request classes</h2>
+
+<p>
+  The <code>res</code> and <code>req</code> objects are instances
+  of <code>Syro::Response</code> and <code>Rack::Request</code>
+  respectively. If you want to provide your own classes, you can
+  redefine the <code>response_class</code> and <code>request_class</code>
+  methods:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  class MyResponse < Syro::Response
+  end
+
+  class MyRequest < Rack::Request
+  end
+
+  class MyDeck < Syro::Deck
+    def response_class
+      MyResponse
+    end
+
+    def request_class
+      MyRequest
+    end
+  end
+
+  app = Syro.new(MyDeck) {
+    get {
+      res.write req.class
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Type"</span>=><span>"text/html"</span>,
+    <span>"Content-Length"</span>=><span>"9"</span>},
+   [<span>"MyRequest"</span>]]
+</pre>
+
+<p>
+  You can reuse the same Deck in different applications and combine
+  functionality by mixing in several modules. There are no limits
+  really.
+</p>
+
+<p><a href="ch11.html">Continue to Chapter 11</a></p>

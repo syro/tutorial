@@ -1,0 +1,118 @@
+<h1>7. Request methods</h1>
+
+<p>
+  Syro directly supports matchers for the request methods
+  <code>get</code>, <code>put</code>, <code>post</code>,
+  <code>patch</code> and <code>delete</code>.
+</p>
+
+<p>
+  The following example responds differently to each verb, even if
+  the path remains the same:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    on(<span>"foo"</span>) {
+      get {
+        res.write <span>"GET /foo"</span>
+      }
+
+      put {
+        res.write <span>"PUT /foo"</span>
+      }
+
+      post {
+        res.write <span>"POST /foo"</span>
+      }
+
+      patch {
+        res.write <span>"PATCH /foo"</span>
+      }
+
+      delete {
+        res.write <span>"DELETE /foo"</span>
+      }
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"DELETE"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/foo"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"11"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"DELETE /foo"</span>]]
+</pre>
+
+<p>
+  As explained in <a href="ch2.html">Chapter 2</a>, we are not only
+  matching the <code>REQUEST_METHOD</code>, but we are also asserting
+  that there are no segments left to be matched.
+</p>
+
+<p>
+  There are more HTTP methods than what we covered in Syro. If you
+  need some other method, you can always use <code>on</code> to
+  match a boolean (more information in <a href="ch9.html">Chapter
+  9</a>):
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    on(<span>"foo"</span>) {
+      on(req.options?) {
+        root {
+          res.write <span>"OPTIONS /foo"</span>
+        }
+      }
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"OPTIONS"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/foo"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"12"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"OPTIONS /foo"</span>]]
+</pre>
+
+<p>
+  Note that we had to call <code>root</code> to make sure there are
+  no extra segments in the path.
+</p>
+
+<h2>Exercise</h2>
+
+<p>
+  Remove the call to <code>root</code> but leave the call to
+  <code>res.write</code>. Do you get the same output? Now modify
+  <code>PATH_INFO</code>. What happens?
+</p>
+
+<p><a href="ch8.html">Continue to Chapter 8</a></p>

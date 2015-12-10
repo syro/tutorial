@@ -1,0 +1,141 @@
+<h1>11. Rendering templates</h1>
+
+<p>
+  For this chapter we will use <a
+  href="https://github.com/soveran/mote">Mote</a>, a very simple
+  and powerful template engine.
+</p>
+
+<p>
+  Save this template to <code>"./views/index.mote"</code>:
+</p>
+
+<pre>
+  <span>&lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;title&gt;<b>{{title}}</b>&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+     <b>{{content}}</b>
+    &lt;/body&gt;
+  &lt;/html&gt;</span>
+</pre>
+
+<p>
+  Now let's create a custom Deck with methods for rendering the template.
+</p>
+
+<pre>
+  require <span>"syro"</span>
+  require <span>"mote"</span>
+
+  class Web < Syro::Deck
+    include Mote::Helpers
+
+    def view(template)
+      sprintf(<span>"views/%s.mote"</span>, template)
+    end
+
+    def render(template, options = {})
+      res.write mote(view(template), options)
+    end
+  end
+
+  app = Syro.new(Web) {
+    get {
+      render(<span>"index"</span>, <var>title:</var> <span>"foo"</span>, <var>content:</var> <span>"bar"</span>)
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"100"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"&lt;!DOCTYPE html&gt;..."</span>]]
+</pre>
+
+<p>
+  Most of the body was ommited in the example, but you should be
+  able to see how the variables in the template got the right values.
+</p>
+
+<p>
+  Rename <code>index.mote</code> to <code>layout.mote</code>, and create the file <code>index.mote</code> with the following content:
+</p>
+
+<pre>
+  <span>&lt;h1&gt;<b>{{title}}</b>&lt;/h1&gt;
+  &lt;p&gt;<b>{{content}}</b>&lt;/p&gt;</span>
+</pre>
+
+<p>
+  We can now modify our Deck to include layouts and partials.
+</p>
+
+<pre>
+  require <span>"syro"</span>
+  require <span>"mote"</span>
+
+  class Web < Syro::Deck
+    include Mote::Helpers
+
+    def view(template)
+      sprintf(<span>"views/%s.mote"</span>, template)
+    end
+
+    def partial(template, options = {})
+      mote(view(template), options)
+    end
+
+    def render(template, options = {})
+      res.write partial(<span>"layout"</span>,
+        <var>title:</var> options[:title],
+        <var>content:</var> partial(template, options))
+    end
+  end
+
+  app = Syro.new(Web) {
+    get {
+      render(<span>"index"</span>, <var>title:</var> <span>"foo"</span>, <var>content:</var> <span>"bar"</span>)
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"124"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"&lt;!DOCTYPE html&gt;..."</span>]]
+</pre>
+
+<p>
+  Again, most of the body was ommited in the output, but you should
+  be able to see how the template was inserted in the layout, and
+  all the variables were replaced with the supplied values.
+</p>
+
+<p><a href="ch12.html">Continue to Chapter 12</a></p>

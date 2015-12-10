@@ -1,0 +1,97 @@
+<h1>5. Composing applications</h1>
+
+<p>
+  The pilars for scalability are simplicity and modularity. With
+  Syro you can achieve both, and in this chapter we will explore
+  how applications can be mounted on top of other applications.
+</p>
+
+<p>
+  In the following example, we will use a different application if
+  the visitor tries to access <code>"/admin"</code>:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  admin = Syro.new {
+    get {
+      res.write <span>"GET /admin"</span>
+    }
+  }
+
+  app = Syro.new {
+    on(<span>"admin"</span>) {
+      run(admin)
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/admin"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"10"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"GET /admin"</span>]]
+</pre>
+
+<h2>Sharing information between apps</h2>
+
+<p>
+  When mounting an application, you can provide a hash that will
+  become the inbox of the mounted app:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  admin = Syro.new {
+    get {
+      res.write <span>"GET #{</span>inbox[<var>:path</var>]<span>}"</span>
+    }
+  }
+
+  app = Syro.new {
+    on(<span>"admin"</span>) {
+      run(admin, <var>path:</var> path.prev)
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/admin"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"10"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"GET /admin"</span>]]
+</pre>
+
+<h2>Exercise</h2>
+
+<p>
+  Can you mount the same app at two different places? Can you mount
+  an app on a mounted app? Remember to modify <code>PATH_INFO</code>
+  to access different matchers.
+</p>
+
+<p><a href="ch6.html">Continue to Chapter 6</a></p>

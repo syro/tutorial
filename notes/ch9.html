@@ -1,0 +1,133 @@
+<h1>9. The request object</h1>
+
+<p>
+  The <code>req</code> object comes from Rack, and it includes many
+  helper methods for querying the values of <code>env</code>. Below
+  you will find some of its features. To see every option, refer
+  to <a href="http://www.rubydoc.info/github/rack/rack/Rack/Request">Rack's
+  documentation</a>.
+</p>
+
+<h2>Request methods</h2>
+
+<p>
+  You can query the value of <code>REQUEST_METHOD</code> with these
+  helpers:
+</p>
+
+<pre>
+  <span style="color: #999;"># env["REQUEST_METHOD"] == "GET"</span>
+  req.get?
+
+  <span style="color: #999;"># env["REQUEST_METHOD"] == "PUT"</span>
+  req.put?
+
+  <span style="color: #999;"># env["REQUEST_METHOD"] == "POST"</span>
+  req.post?
+
+  <span style="color: #999;"># env["REQUEST_METHOD"] == "PATCH"</span>
+  req.patch?
+
+  <span style="color: #999;"># env["REQUEST_METHOD"] == "DELETE"</span>
+  req.delete?
+
+  <span style="color: #999;"># env["REQUEST_METHOD"] == "HEAD"</span>
+  req.head?
+
+  <span style="color: #999;"># env["REQUEST_METHOD"] == "TRACE"</span>
+  req.trace?
+
+  <span style="color: #999;"># env["REQUEST_METHOD"] == "OPTIONS"</span>
+  req.options?
+</pre>
+
+<p>
+  As the return values are booleans, you can use them with the
+  <code>on</code> method.
+</p>
+
+<h2>Parameters</h2>
+
+<p>
+  Access any parameter sent with <code>req.params</code>:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    get {
+      res.write req.params[<span>"foo"</span>]
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"QUERY_STRING"</span>   => <span>"foo=bar"</span>,
+    <span>"rack.input"</span>     => <span>String.new</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"3"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"bar"</span>]]
+</pre>
+
+<p>
+  We had to add an extra request header for <code>rack.input</code>,
+  otherwise Rack would have complained that it couldn't read it.
+  When using a webserver and a browser, you won't need to take those
+  subtleties into account.
+</p>
+
+<h2>Cookies</h2>
+
+<p>
+  Access the cookies with <code>req.cookies</code>:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    get {
+      res.write req.cookies[<span>"foo"</span>]
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"HTTP_COOKIE"</span>    => <span>"foo=bar"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"3"</span>},
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"bar"</span>]]
+</pre>
+
+<p>
+  Refer to <a
+  href="http://www.rubydoc.info/github/rack/rack/Rack/Request">Rack's
+  documentation</a> to see what else you can do.
+</p>
+
+<p><a href="ch10.html">Continue to Chapter 10</a></p>

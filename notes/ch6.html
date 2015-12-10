@@ -1,0 +1,67 @@
+<h1>6. Inspecting the path</h1>
+
+<p>
+  We mentioned early on that Syro can match and capture path segments,
+  but how exactly?  In this chapter we will examine the <code>path</code>
+  object to see how it keeps track of the current and previous
+  paths.
+</p>
+
+<p>
+  The following example builds the response gradually. That is, it
+  uses <code>res.write</code> more than once, and the response
+  contains an array of the successive calls.
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    res.write sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
+
+    on(<span>"foo"</span>) {
+      res.write sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
+
+      on(<span>"bar"</span>) {
+        res.write sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
+      }
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/foo/bar"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"27"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"|/foo/bar"</span>, <span>"/foo|/bar"</span>, <span>"/foo/bar|"</span>]]
+</pre>
+
+<p>
+  While building the response, we put a pipe at the position where
+  <code>path.prev</code> and <code>path.curr</code> would be joined.
+  As the path segments were matched, parts of <code>path.curr</code>
+  were moved to <code>path.prev</code>. Each call to <code>on</code>
+  uses the current version of the path (<code>path.curr</code>) and
+  ignores the rest.  That is what allows Syro to match successive
+  segments with nested blocks.
+</p>
+
+<h2>Exercise</h2>
+
+<p>
+  Replace some matcher with a capture by using a symbol. How does
+  it behave?
+</p>
+
+<p><a href="ch7.html">Continue to Chapter 7</a></p>

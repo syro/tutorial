@@ -1,0 +1,200 @@
+<h1>8. The response object</h1>
+
+<p>
+  We have been using <code>res.write</code> in all the examples,
+  and now we will discover what other methods we can call on
+  <code>res</code>.
+</p>
+
+<h2>Redirects</h2>
+
+<p>
+  You can call <code>res.redirect</code> to take the visitor to a
+  different URL:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    get {
+      res.redirect <span>"/foo"</span>
+    }
+
+    on(<span>"foo"</span>) {
+      get {
+        res.write <span>"GET /foo"</span>
+      }
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [302,
+   {<span>"Location"</span>=><span>"/foo"</span>},
+   []]
+</pre>
+
+<p>
+  Our little application is returning a redirection, which tells
+  browsers to go to a different URL. Soon we will be able to see
+  this result in the browser and it will all make sense.
+</p>
+
+<h2>Status codes</h2>
+
+<p>
+  We can get or set the status code of the response by using the
+  accessor <code>res.status</code>:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    get {
+      res.status = 501
+      res.write <span>"Not implemented yet!"</span>
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [501,
+   {<span>"Content-Length"</span>=><span>"20"</span>},
+   [<span>"Not implemented yet!"</span>]]
+</pre>
+
+<h2>Headers</h2>
+
+<p>
+  We can configure response headers with the <code>res.headers</code> hash:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    get {
+      res.headers[<span>"Content-Type"</span>] = <span>"application/json"</span>
+      res.write <span>"{\"result\":true}"</span>
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Type"</span>=><span>"application/json"</span>,
+    <span>"Content-Length"</span>=><span>"15"</span>},
+   [<span>"{\"result\":true}"</span>]]
+</pre>
+
+<h2>Cookies</h2>
+
+<p>
+  Manage cookies with <code>res.set_cookie</code> and <code>res.delete_cookie</code>:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    get {
+      res.set_cookie(<span>"foo"</span>, <span>"bar"</span>)
+      res.redirect <span>"/admin"</span>
+    }
+
+    on(<span>"admin"</span>) {
+      get {
+        res.delete_cookie(<span>"foo"</span>)
+        res.write req.cookies[<span>"foo"</span>]
+      }
+    }
+  }
+
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [302,
+   {<span>"Set-Cookie"</span>=><span>"foo=bar"</span>,
+    <span>"Location"</span>=><span>"/admin"</span>},
+   []]
+</pre>
+
+<p>
+  We got a redirection and a cookie header. We can now simulate
+  what the browser will do in order to follow the redirect. Append
+  the code below:
+</p>
+
+<pre>
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/admin"</span>,
+    <span>"HTTP_COOKIE"</span>    => <span>"foo=bar"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Set-Cookie"</span>=><span>"foo=; ..."</span>,
+    <span>"Content-Length"</span>=><span>"3"</span>},
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"bar"</span>]]
+</pre>
+
+<p>
+  Part of <code>Set-Cookie</code> was ommited in the example, but
+  it has to do with expiring the <code>foo</code> cookie.
+</p>
+
+<p><a href="ch9.html">Continue to Chapter 9</a></p>

@@ -1,0 +1,83 @@
+<h1>1. Hello World!</h1>
+
+<p>
+  Open a file called <code>app.rb</code> and type the following
+  code:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  app = Syro.new {
+    get {
+      res.write <span>"hello, world"</span>
+    }
+  }
+</pre>
+
+<p>
+  You can run the code with Ruby:
+</p>
+
+<pre>
+  ruby ./app.rb
+</pre>
+
+<p>
+  But as expected, you won't see any output. A Syro app can be
+  called by passing a hash with CGI variables, so let's give it a
+  try.  Append the following code to the file:
+</p>
+
+<pre>
+  env = {
+    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+  }
+
+  p app.call(env)
+</pre>
+
+<p>
+  If you run the code again, you will get this output:
+</p>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=><span>"12"</span>,
+    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   [<span>"hello, world"</span>]]
+</pre>
+
+<p>
+  If you are familiar with Rack, you will recognize the output.  If
+  not, reading about Rack will come handy later on.
+</p>
+
+<p>
+  You can see that the body of the response contained the string
+  "hello, world". That's because the block that was passed to
+  <code>get</code> was executed. When <code>get</code> is called,
+  it checks two things: first, it makes sure the
+  <code>REQUEST_METHOD</code> is <code>"GET"</code>; then it checks
+  <code>"PATH_INFO"</code> to see if we are at the end of the path.
+  The terminal <code>"/"</code> is considered the end of the path,
+  and as <code>REQUEST_METHOD</code> was set to <code>"GET"</code>
+  the block passed to <code>get</code> was evaluated. Finally, the
+  response was generated and returned.
+</p>
+
+<p>
+  We will see later how to run this code with a webserver, but for
+  now it's better to get familiar with the underlying mechanics.
+</p>
+
+<h2>Exercise</h2>
+
+<p>
+  Change the value of <code>REQUEST_METHOD</code> and run the program
+  again. Does it work as expected? Change the value of
+  <code>PATH_INFO</code>, run it again. What happens?
+</p>
+
+<p><a href="ch2.html">Continue to Chapter 2</a></p>

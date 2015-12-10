@@ -1,0 +1,116 @@
+body {
+  font-family: "Georgia", serif;
+  color: #111;
+  background-color: #faffff;
+}
+
+header {
+  position: fixed;
+  top: 100px;
+  left: 70px;
+}
+
+header a {
+  font-family: "Fredoka One", sans-serif;
+  font-weight: normal;
+  font-size: 4em;
+  text-decoration: none;
+  padding: 0.2em 0.4em;
+  color: #f55;
+  text-shadow: 1px 1px #033;
+}
+
+section {
+  font-size: 1.2em;
+  display: block;
+  margin-top: 124px;
+  margin-left: 320px;
+  width: 30em;
+}
+
+section h1 {
+  font-weight: normal;
+  font-size: 1.8em;
+  margin-bottom: 1em;
+}
+
+section h2 {
+  font-weight: normal;
+  font-size: 1.5em;
+  margin: 2em 0 1em 0;
+}
+
+section h2 a {
+  text-decoration: none;
+  color: #08109F;
+}
+
+section p {
+  font-weight: 400;
+  line-height: 150%;
+}
+
+section a {
+  color: #c55;
+}
+
+section p code {
+  font-family: "Inconsolata";
+  padding: 0 0.2em;
+  background-color: #fff;
+  border: 1px solid #eee;
+}
+
+section pre {
+  font-family: "Inconsolata";
+  padding: 1em 0;
+  background-color: #fff;
+  border: 1px solid #eee;
+}
+
+section pre span {
+  color: #090;
+  font-style: normal;
+}
+
+section pre var {
+  color: #669;
+  font-style: normal;
+}
+
+footer {
+  margin: 50px 0 50px 320px;
+  width: 30em;
+  border-top: 1px dotted black;
+}
+
+footer a {
+  text-decoration: none;
+  color: #c00;
+}
+
+@media only screen and (max-width: 929px) {
+  header {
+    position: relative;
+    margin: 4em;
+    top: 0;
+    left: 0;
+    text-align: center;
+  }
+
+  header img {
+    width: 100%;
+  }
+
+  section {
+    margin: auto;
+    padding: 0;
+    width: 90%
+  }
+
+  footer {
+    margin: 3em auto;
+    padding: 0;
+    width: 90%;
+  }
+}
