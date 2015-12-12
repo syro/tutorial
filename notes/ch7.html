@@ -2,8 +2,9 @@
 
 <p>
   Syro directly supports matchers for the request methods
-  <code>get</code>, <code>put</code>, <code>post</code>,
-  <code>patch</code> and <code>delete</code>.
+  <code>get</code>, <code>put</code>, <code>head</code>,
+  <code>post</code>, <code>patch</code>, <code>delete</code>
+  and <code>options</code>.
 </p>
 
 <p>
@@ -24,6 +25,10 @@
         res.write <span>"PUT /foo"</span>
       }
 
+      head {
+        res.write <span>"HEAD /foo"</span>
+      }
+
       post {
         res.write <span>"POST /foo"</span>
       }
@@ -34,6 +39,10 @@
 
       delete {
         res.write <span>"DELETE /foo"</span>
+      }
+
+      options {
+        res.write <span>"OPTIONS /foo"</span>
       }
     }
   }
@@ -75,16 +84,16 @@
 
   app = Syro.new {
     on(<span>"foo"</span>) {
-      on(req.options?) {
+      on(req.trace?) {
         root {
-          res.write <span>"OPTIONS /foo"</span>
+          res.write <span>"TRACE /foo"</span>
         }
       }
     }
   }
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"OPTIONS"</span>,
+    <span>"REQUEST_METHOD"</span> => <span>"TRACE"</span>,
     <span>"PATH_INFO"</span>      => <span>"/foo"</span>,
   }
 
@@ -99,7 +108,7 @@
   [200,
    {<span>"Content-Length"</span>=><span>"12"</span>,
     <span>"Content-Type"</span>=><span>"text/html"</span>},
-   [<span>"OPTIONS /foo"</span>]]
+   [<span>"TRACE /foo"</span>]]
 </pre>
 
 <p>
