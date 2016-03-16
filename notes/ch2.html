@@ -21,17 +21,17 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    get {
+  app = Syro.new do
+    get do
       res.write <span>"GET /"</span>
-    }
+    end
 
-    on(<span>"foo/bar/baz"</span>) {
-      get {
+    on <span>"foo/bar/baz"</span> do
+      get do
         res.write <span>"GET /foo/bar/baz"</span>
-      }
-    }
-  }
+      end
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
@@ -71,21 +71,21 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    get {
+  app = Syro.new do
+    get do
       res.write <span>"GET /"</span>
-    }
+    end
 
-    on(<span>"foo"</span>) {
-      on(<span>"bar"</span>) {
-        on(<span>"baz"</span>) {
-          get {
+    on <span>"foo"</span> do
+      on <span>"bar"</span> do
+        on <span>"baz"</span> do
+          get do
             res.write <span>"GET /foo/bar/baz"</span>
-          }
-        }
-      }
-    }
-  }
+          end
+        end
+      end
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,

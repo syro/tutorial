@@ -42,11 +42,11 @@
     end
   end
 
-  app = Syro.new(Web) {
-    get {
+  app = Syro.new(Web) do
+    get do
       render(<span>"index"</span>, <var>title:</var> <span>"foo"</span>, <var>content:</var> <span>"bar"</span>)
-    }
-  }
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
@@ -107,11 +107,11 @@
     end
   end
 
-  app = Syro.new(Web) {
-    get {
+  app = Syro.new(Web) do
+    get do
       render(<span>"index"</span>, <var>title:</var> <span>"foo"</span>, <var>content:</var> <span>"bar"</span>)
-    }
-  }
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,

@@ -16,17 +16,17 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
+  app = Syro.new do
     res.write sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
 
-    on(<span>"foo"</span>) {
+    on <span>"foo"</span> do
       res.write sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
 
-      on(<span>"bar"</span>) {
+      on <span>"bar"</span> do
         res.write sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
-      }
-    }
-  }
+      end
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,

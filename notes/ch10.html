@@ -25,11 +25,11 @@
     end
   end
 
-  app = Syro.new(API) {
-    get {
+  app = Syro.new(API) do
+    get do
       json(<var>result:</var> true)
-    }
-  }
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
@@ -76,11 +76,11 @@
     end
   end
 
-  app = Syro.new(API) {
-    get {
+  app = Syro.new(API) do
+    get do
       json(<var>result:</var> true)
-    }
-  }
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
@@ -136,11 +136,11 @@
     end
   end
 
-  app = Syro.new(MyDeck) {
-    get {
+  app = Syro.new(MyDeck) do
+    get do
       res.write req.class
-    }
-  }
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,

@@ -26,15 +26,15 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    on(<span>"posts"</span>) {
-      on(<var>:post_id</var>) {
-        get {
+  app = Syro.new do
+    on <span>"posts"</span> do
+      on <var>:post_id</var> do
+        get do
           res.write <span>"GET /posts/#{</span>inbox[<var>:post_id</var>]<span>}"</span>
-        }
-      }
-    }
-  }
+        end
+      end
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,

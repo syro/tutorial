@@ -15,37 +15,37 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    on(<span>"foo"</span>) {
-      get {
+  app = Syro.new do
+    on <span>"foo"</span> do
+      get do
         res.write <span>"GET /foo"</span>
-      }
+      end
 
-      put {
+      put do
         res.write <span>"PUT /foo"</span>
-      }
+      end
 
-      head {
+      head do
         res.write <span>"HEAD /foo"</span>
-      }
+      end
 
-      post {
+      post do
         res.write <span>"POST /foo"</span>
-      }
+      end
 
-      patch {
+      patch do
         res.write <span>"PATCH /foo"</span>
-      }
+      end
 
-      delete {
+      delete do
         res.write <span>"DELETE /foo"</span>
-      }
+      end
 
-      options {
+      options do
         res.write <span>"OPTIONS /foo"</span>
-      }
-    }
-  }
+      end
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"DELETE"</span>,
@@ -82,15 +82,15 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    on(<span>"foo"</span>) {
-      on(req.trace?) {
-        root {
+  app = Syro.new do
+    on <span>"foo"</span> do
+      on req.trace? do
+        root do
           res.write <span>"TRACE /foo"</span>
-        }
-      }
-    }
-  }
+        end
+      end
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"TRACE"</span>,

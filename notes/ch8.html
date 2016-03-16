@@ -16,17 +16,17 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    get {
+  app = Syro.new do
+    get do
       res.redirect <span>"/foo"</span>
-    }
+    end
 
-    on(<span>"foo"</span>) {
-      get {
+    on <span>"foo"</span> do
+      get do
         res.write <span>"GET /foo"</span>
-      }
-    }
-  }
+      end
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
@@ -62,14 +62,14 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    get {
+  app = Syro.new do
+    get do
       res.status = 501
       res.write <span>"Not implemented yet!"</span>
-    }
-  }
+    end
+  end
 
-  env = {
+  env = do
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
     <span>"PATH_INFO"</span>      => <span>"/"</span>,
   }
@@ -96,12 +96,12 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    get {
+  app = Syro.new do
+    get do
       res.headers[<span>"Content-Type"</span>] = <span>"application/json"</span>
       res.write <span>"{\"result\":true}"</span>
-    }
-  }
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
@@ -131,19 +131,19 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    get {
+  app = Syro.new do
+    get do
       res.set_cookie(<span>"foo"</span>, <span>"bar"</span>)
       res.redirect <span>"/admin"</span>
-    }
+    end
 
-    on(<span>"admin"</span>) {
-      get {
+    on <span>"admin"</span> do
+      get do
         res.delete_cookie(<span>"foo"</span>)
         res.write req.cookies[<span>"foo"</span>]
-      }
-    }
-  }
+      end
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,

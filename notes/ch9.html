@@ -55,11 +55,11 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    get {
+  app = Syro.new do
+    get do
       res.write req.params[<span>"foo"</span>]
-    }
-  }
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
@@ -98,11 +98,11 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new {
-    get {
+  app = Syro.new do
+    get do
       res.write req.cookies[<span>"foo"</span>]
-    }
-  }
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,

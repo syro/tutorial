@@ -14,17 +14,17 @@
 <pre>
   require <span>"syro"</span>
 
-  admin = Syro.new {
-    get {
+  admin = Syro.new do
+    get do
       res.write <span>"GET /admin"</span>
-    }
-  }
+    end
+  end
 
-  app = Syro.new {
-    on(<span>"admin"</span>) {
+  app = Syro.new do
+    on <span>"admin"</span> do
       run(admin)
-    }
-  }
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
@@ -55,17 +55,17 @@
 <pre>
   require <span>"syro"</span>
 
-  admin = Syro.new {
-    get {
+  admin = Syro.new do
+    get do
       res.write <span>"GET #{</span>inbox[<var>:path</var>]<span>}"</span>
-    }
-  }
+    end
+  end
 
-  app = Syro.new {
-    on(<span>"admin"</span>) {
+  app = Syro.new do
+    on <span>"admin"</span> do
       run(admin, <var>path:</var> path.prev)
-    }
-  }
+    end
+  end
 
   env = {
     <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
