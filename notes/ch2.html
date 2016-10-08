@@ -23,12 +23,16 @@
 
   app = Syro.new do
     get do
-      res.write <span>"GET /"</span>
+      res.write <span>"Welcome!"</span>
     end
 
-    on <span>"foo/bar/baz"</span> do
-      get do
-        res.write <span>"GET /foo/bar/baz"</span>
+    on <span>"foo"</span> do
+      on <span>"bar"</span> do
+        on <span>"baz"</span> do
+          get do
+            res.write <span>"Hello World!"</span>
+          end
+        end
       end
     end
   end
@@ -49,7 +53,7 @@
   [200,
    {<span>"Content-Length"</span>=><span>"16"</span>,
     <span>"Content-Type"</span>=><span>"text/html"</span>},
-   [<span>"GET /foo/bar/baz"</span>]]
+   [<span>"Hello World!"</span>]]
 </pre>
 
 <p>
@@ -61,42 +65,6 @@
   <code>"foo/bar/baz"</code> segments. Only once <code>on</code>
   matches those segments we reach the end of the path, and the
   nested <code>get</code> matches.
-</p>
-
-<p>
-  We can also match each segment individually by nesting calls to
-  <code>on</code>:
-</p>
-
-<pre>
-  require <span>"syro"</span>
-
-  app = Syro.new do
-    get do
-      res.write <span>"GET /"</span>
-    end
-
-    on <span>"foo"</span> do
-      on <span>"bar"</span> do
-        on <span>"baz"</span> do
-          get do
-            res.write <span>"GET /foo/bar/baz"</span>
-          end
-        end
-      end
-    end
-  end
-
-  env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/foo/bar/baz"</span>,
-  }
-
-  p app.call(env)
-</pre>
-
-<p>
-  If you run the program, the result will be the same as before.
 </p>
 
 <h2>Exercise</h2>
