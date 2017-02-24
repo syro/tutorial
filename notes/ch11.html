@@ -38,22 +38,22 @@
     end
 
     def render(template, options = {})
-      res.write mote(view(template), options)
+      res.html mote(view(template), options)
     end
   end
 
-  app = Syro.new(Web) do
+  App = Syro.new(Web) do
     get do
       render(<span>"index"</span>, <var>title:</var> <span>"foo"</span>, <var>content:</var> <span>"bar"</span>)
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -62,8 +62,8 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"100"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   {<span>"Content-Length"</span>=&gt;<span>"100"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/html"</span>},
    [<span>"&lt;!DOCTYPE html&gt;..."</span>]]
 </pre>
 
@@ -73,7 +73,8 @@
 </p>
 
 <p>
-  Rename <code>index.mote</code> to <code>layout.mote</code>, and create the file <code>index.mote</code> with the following content:
+  Rename <code>index.mote</code> to <code>layout.mote</code>, and
+  create the file <code>index.mote</code> with the following content:
 </p>
 
 <pre>
@@ -96,29 +97,29 @@
       sprintf(<span>"views/%s.mote"</span>, template)
     end
 
-    def partial(template, options = {})
-      mote(view(template), options)
+    def partial(template, params = {})
+      mote(view(template), params)
     end
 
-    def render(template, options = {})
-      res.write partial(<span>"layout"</span>,
-        <var>title:</var> options[:title],
-        <var>content:</var> partial(template, options))
+    def render(template, params = {})
+      res.html partial(<span>"layout"</span>,
+        <var>title:</var> params[:title],
+        <var>content:</var> partial(template, params))
     end
   end
 
-  app = Syro.new(Web) do
+  App = Syro.new(Web) do
     get do
       render(<span>"index"</span>, <var>title:</var> <span>"foo"</span>, <var>content:</var> <span>"bar"</span>)
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -127,8 +128,8 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"124"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   {<span>"Content-Length"</span>=&gt;<span>"124"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/html"</span>},
    [<span>"&lt;!DOCTYPE html&gt;..."</span>]]
 </pre>
 

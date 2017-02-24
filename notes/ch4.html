@@ -19,21 +19,21 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
+  App = Syro.new do
     on env[<span>"HTTP_REFERER"</span>] != <span>""</span> do
       get do
-        res.write <span>"HTTP_REFERER => #{</span>env[<span>"HTTP_REFERER"</span>]<span>}"</span>
+        res.text <span>"I got #{</span>env[<span>"HTTP_REFERER"</span>]<span>}"</span>
       end
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
-    <span>"HTTP_REFERER"</span>   => <span>"http://example.com"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
+    <span>"HTTP_REFERER"</span>   =&gt; <span>"http://example.com"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -42,9 +42,9 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"34"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
-   [<span>"HTTP_REFERER => http://example.com"</span>]]
+   {<span>"Content-Length"</span>=&gt;<span>"24"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/plain"</span>},
+   [<span>"I got http://example.com"</span>]]
 </pre>
 
 <h2>Exercise</h2>

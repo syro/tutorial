@@ -13,35 +13,35 @@
 
 <pre>
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/posts/42"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/hello/world"</span>,
   }
 </pre>
 
 <p>
-  Here's the code to match the segment <code>"posts"</code> and
-  capture the segment <code>"42"</code>:
+  Here's the code to match the segment <code>"hello"</code> and
+  capture the segment <code>"world"</code>:
 </p>
 
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
-    on <span>"posts"</span> do
-      on <var>:post_id</var> do
+  App = Syro.new do
+    on <span>"hello"</span> do
+      on <var>:name</var> do
         get do
-          res.write <span>"GET /posts/#{</span>inbox[<var>:post_id</var>]<span>}"</span>
+          res.text <span>"Hello #{</span>inbox[<var>:name</var>]<span>}"</span>
         end
       end
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/posts/42"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/hello/world"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -50,9 +50,9 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"13"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
-   [<span>"GET /posts/42"</span>]]
+   {<span>"Content-Length"</span>=&gt;<span>"11"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/html"</span>},
+   [<span>"Hello world"</span>]]
 </pre>
 
 <p>
@@ -60,11 +60,31 @@
   under the key passed to <code>on</code>.
 </p>
 
+<p>
+  What if we try a name other than "world"?
+</p>
+
+<pre>
+  env = {
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/hello/there"</span>,
+  }
+
+  p App.call(env)
+</pre>
+
+<pre>
+  [200,
+   {<span>"Content-Length"</span>=&gt;<span>"11"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/html"</span>},
+   [<span>"Hello there"</span>]]
+</pre>
+
 <h2>Exercise</h2>
 
 <p>
   Change the value of <code>PATH_INFO</code> to
-  <code>"/posts/42/comments"</code> and modify the calls to
+  <code>"/hello/there/world"</code> and modify the calls to
   <code>on</code> to match each segment.
 </p>
 

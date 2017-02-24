@@ -14,24 +14,24 @@
 <pre>
   require <span>"syro"</span>
 
-  admin = Syro.new do
+  Admin = Syro.new do
     get do
-      res.write <span>"GET /admin"</span>
+      res.text <span>"Got /admin"</span>
     end
   end
 
-  app = Syro.new do
+  App = Syro.new do
     on <span>"admin"</span> do
-      run(admin)
+      run(Admin)
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/admin"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/admin"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -40,9 +40,9 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"10"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
-   [<span>"GET /admin"</span>]]
+   {<span>"Content-Length"</span>=&gt;<span>"10"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/plain"</span>},
+   [<span>"Got /admin"</span>]]
 </pre>
 
 <h2>Sharing information between apps</h2>
@@ -55,24 +55,24 @@
 <pre>
   require <span>"syro"</span>
 
-  admin = Syro.new do
+  Admin = Syro.new do
     get do
-      res.write <span>"GET #{</span>inbox[<var>:path</var>]<span>}"</span>
+      res.text <span>"Got #{</span>inbox[<var>:path</var>]<span>}"</span>
     end
   end
 
-  app = Syro.new do
+  App = Syro.new do
     on <span>"admin"</span> do
-      run(admin, <var>path:</var> path.prev)
+      run(Admin, <var>path:</var> path.prev)
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/admin"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/admin"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -81,9 +81,9 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"10"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
-   [<span>"GET /admin"</span>]]
+   {<span>"Content-Length"</span>=&gt;<span>"10"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/plain"</span>},
+   [<span>"Got /admin"</span>]]
 </pre>
 
 <h2>Exercise</h2>

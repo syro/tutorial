@@ -7,8 +7,8 @@
 
 <pre>
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/foo/bar/baz"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/foo/bar/baz"</span>,
   }
 </pre>
 
@@ -21,16 +21,16 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
+  App = Syro.new do
     get do
-      res.write <span>"Welcome!"</span>
+      res.text <span>"Welcome!"</span>
     end
 
     on <span>"foo"</span> do
       on <span>"bar"</span> do
         on <span>"baz"</span> do
           get do
-            res.write <span>"Hello World!"</span>
+            res.text <span>"Hello world!"</span>
           end
         end
       end
@@ -38,11 +38,11 @@
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/foo/bar/baz"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/foo/bar/baz"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -51,9 +51,9 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"16"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
-   [<span>"Hello World!"</span>]]
+   {<span>"Content-Length"</span>=&gt;<span>"12"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/plain"</span>},
+   [<span>"Hello world!"</span>]]
 </pre>
 
 <p>

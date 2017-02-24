@@ -9,31 +9,31 @@
 
 <p>
   The following example builds the response gradually. That is, it
-  uses <code>res.write</code> more than once, and the response
+  uses <code>res.text</code> more than once, and the response
   contains an array of the successive calls.
 </p>
 
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
-    res.write sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
+  App = Syro.new do
+    res.text sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
 
     on <span>"foo"</span> do
-      res.write sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
+      res.text sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
 
       on <span>"bar"</span> do
-        res.write sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
+        res.text sprintf(<span>"%s|%s"</span>, path.prev, path.curr)
       end
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/foo/bar"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/foo/bar"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -42,8 +42,8 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"27"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   {<span>"Content-Length"</span>=&gt;<span>"27"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/plain"</span>},
    [<span>"|/foo/bar"</span>, <span>"/foo|/bar"</span>, <span>"/foo/bar|"</span>]]
 </pre>
 

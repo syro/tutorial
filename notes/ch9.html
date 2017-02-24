@@ -55,20 +55,20 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
+  App = Syro.new do
     get do
-      res.write req.params[<span>"foo"</span>]
+      res.text req.params[<span>"foo"</span>]
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
-    <span>"QUERY_STRING"</span>   => <span>"foo=bar"</span>,
-    <span>"rack.input"</span>     => <span>String.new</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
+    <span>"QUERY_STRING"</span>   =&gt; <span>"foo=bar"</span>,
+    <span>"rack.input"</span>     =&gt; <span>String.new</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -77,8 +77,8 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"3"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   {<span>"Content-Length"</span>=&gt;<span>"3"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/html"</span>},
    [<span>"bar"</span>]]
 </pre>
 
@@ -98,19 +98,19 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
+  App = Syro.new do
     get do
-      res.write req.cookies[<span>"foo"</span>]
+      res.text req.cookies[<span>"foo"</span>]
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
-    <span>"HTTP_COOKIE"</span>    => <span>"foo=bar"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
+    <span>"HTTP_COOKIE"</span>    =&gt; <span>"foo=bar"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -119,8 +119,8 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"3"</span>},
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   {<span>"Content-Length"</span>=&gt;<span>"3"</span>},
+    <span>"Content-Type"</span>=&gt;<span>"text/plain"</span>},
    [<span>"bar"</span>]]
 </pre>
 

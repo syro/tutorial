@@ -15,44 +15,44 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
+  App = Syro.new do
     on <span>"foo"</span> do
       get do
-        res.write <span>"GET /foo"</span>
+        res.text <span>"GET /foo"</span>
       end
 
       put do
-        res.write <span>"PUT /foo"</span>
+        res.text <span>"PUT /foo"</span>
       end
 
       head do
-        res.write <span>"HEAD /foo"</span>
+        res.text <span>"HEAD /foo"</span>
       end
 
       post do
-        res.write <span>"POST /foo"</span>
+        res.text <span>"POST /foo"</span>
       end
 
       patch do
-        res.write <span>"PATCH /foo"</span>
+        res.text <span>"PATCH /foo"</span>
       end
 
       delete do
-        res.write <span>"DELETE /foo"</span>
+        res.text <span>"DELETE /foo"</span>
       end
 
       options do
-        res.write <span>"OPTIONS /foo"</span>
+        res.text <span>"OPTIONS /foo"</span>
       end
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"DELETE"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/foo"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"DELETE"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/foo"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -61,8 +61,8 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"11"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   {<span>"Content-Length"</span>=&gt;<span>"11"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/plain"</span>},
    [<span>"DELETE /foo"</span>]]
 </pre>
 
@@ -82,22 +82,22 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
+  App = Syro.new do
     on <span>"foo"</span> do
       on req.trace? do
         root do
-          res.write <span>"TRACE /foo"</span>
+          res.text <span>"TRACE /foo"</span>
         end
       end
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"TRACE"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/foo"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"TRACE"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/foo"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -106,8 +106,8 @@
 
 <pre>
   [200,
-   {<span>"Content-Length"</span>=><span>"10"</span>,
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   {<span>"Content-Length"</span>=&gt;<span>"10"</span>,
+    <span>"Content-Type"</span>=&gt;<span>"text/plain"</span>},
    [<span>"TRACE /foo"</span>]]
 </pre>
 
@@ -120,7 +120,7 @@
 
 <p>
   Remove the call to <code>root</code> but leave the call to
-  <code>res.write</code>. Do you get the same output? Now modify
+  <code>res.text</code>. Do you get the same output? Now modify
   <code>PATH_INFO</code>. What happens?
 </p>
 

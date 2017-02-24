@@ -20,23 +20,22 @@
 
   class API < Syro::Deck
     def json(object)
-      res.headers[<span>"Content-Type"</span>] = <span>"application/json"</span>
-      res.write JSON.dump(object)
+      res.json JSON.dump(object)
     end
   end
 
-  app = Syro.new(API) do
+  App = Syro.new(API) do
     get do
       json(<var>result:</var> true)
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -45,8 +44,8 @@
 
 <pre>
   [200,
-   {<span>"Content-Type"</span>=><span>"application/json"</span>,
-    <span>"Content-Length"</span>=><span>"15"</span>},
+   {<span>"Content-Type"</span>=&gt;<span>"application/json"</span>,
+    <span>"Content-Length"</span>=&gt;<span>"15"</span>},
    [<span>"{\"result\":true}"</span>]]
 </pre>
 
@@ -68,26 +67,33 @@
 
   class API < Syro::Deck
     def default_headers
-      { <span>"Content-Type"</span> => <span>"application/json"</span> }
+      {
+        <span>"X-Content-Type-Options"</span>    =&gt; <span>"nosniff"</span>,
+        <span>"X-Download-Options"</span>        =&gt; <span>"noopen"</span>,
+        <span>"X-Frame-Options"</span>           =&gt; <span>"SAMEORIGIN"</span>,
+        <span>"X-Permitted-Cross-Domain-Policies"</span> =&gt; <span>"none"</span>,
+        <span>"X-XSS-Protection"</span>          =&gt; <span>"1; mode=block"</span>,
+        <span>"Strict-Transport-Security"</span> =&gt; <span>"max-age=2628000"</span>
+      }
     end
 
     def json(object)
-      res.write JSON.dump(object)
+      res.json JSON.dump(object)
     end
   end
 
-  app = Syro.new(API) do
+  App = Syro.new(API) do
     get do
       json(<var>result:</var> true)
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -96,15 +102,19 @@
 
 <pre>
   [200,
-   {<span>"Content-Type"</span>=><span>"application/json"</span>,
-    <span>"Content-Length"</span>=><span>"15"</span>},
+   {<span>"Content-Type"</span>=&gt;<span>"application/json"</span>,
+    <span>"Content-Length"</span>=&gt;<span>"15"</span>,
+    <span>"X-Content-Type-Options"</span> =&gt; <span>"nosniff"</span>,
+    <span>"X-Download-Options"</span> =&gt; <span>"noopen"</span>,
+    <span>"X-Frame-Options"</span> =&gt; <span>"SAMEORIGIN"</span>,
+    <span>"X-Permitted-Cross-Domain-Policies"</span> =&gt; <span>"none"</span>,
+    <span>"X-XSS-Protection"</span> =&gt; <span>"1; mode=block"</span>,
+    <span>"Strict-Transport-Security"</span> =&gt; <span>"max-age=2628000"</span>},
    [<span>"{\"result\":true}"</span>]]
 </pre>
 
 <p>
-  The result is the same as before, but instead of setting the JSON
-  header each time you call <code>json</code>, you configure it
-  once and for all.
+  Now the security related headers are included in all responses.
 </p>
 
 <h2>Custom Response and Request classes</h2>
@@ -136,18 +146,18 @@
     end
   end
 
-  app = Syro.new(MyDeck) do
+  App = Syro.new(MyDeck) do
     get do
-      res.write req.class
+      res.text req.class
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -156,8 +166,8 @@
 
 <pre>
   [200,
-   {<span>"Content-Type"</span>=><span>"text/html"</span>,
-    <span>"Content-Length"</span>=><span>"9"</span>},
+   {<span>"Content-Type"</span>=&gt;<span>"text/plain"</span>,
+    <span>"Content-Length"</span>=&gt;<span>"9"</span>},
    [<span>"MyRequest"</span>]]
 </pre>
 

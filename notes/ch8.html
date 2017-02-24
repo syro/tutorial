@@ -1,55 +1,9 @@
 <h1>8. The response object</h1>
 
 <p>
-  We have been using <code>res.write</code> in all the examples,
+  We have been using <code>res.text</code> in all the examples,
   and now we will discover what other methods we can call on
   <code>res</code>.
-</p>
-
-<h2>Redirects</h2>
-
-<p>
-  You can call <code>res.redirect</code> to take the visitor to a
-  different URL:
-</p>
-
-<pre>
-  require <span>"syro"</span>
-
-  app = Syro.new do
-    get do
-      res.redirect <span>"/foo"</span>
-    end
-
-    on <span>"foo"</span> do
-      get do
-        res.write <span>"GET /foo"</span>
-      end
-    end
-  end
-
-  env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
-  }
-
-  p app.call(env)
-</pre>
-
-<p>
-  Output:
-</p>
-
-<pre>
-  [302,
-   {<span>"Location"</span>=><span>"/foo"</span>},
-   []]
-</pre>
-
-<p>
-  Our little application is returning a redirection, which tells
-  browsers to go to a different URL. Soon we will be able to see
-  this result in the browser and it will all make sense.
 </p>
 
 <h2>Status codes</h2>
@@ -62,19 +16,19 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
+  App = Syro.new do
     get do
       res.status = 501
-      res.write <span>"Not implemented yet!"</span>
+      res.text <span>"Not implemented yet!"</span>
     end
   end
 
   env = do
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -83,32 +37,86 @@
 
 <pre>
   [501,
-   {<span>"Content-Length"</span>=><span>"20"</span>},
+   {<span>"Content-Length"</span>=&gt;<span>"20"</span>},
    [<span>"Not implemented yet!"</span>]]
 </pre>
+
+<h2>Content type</h2>
+
+<p>
+  You may have noticed the <code>Content-Type</code> header included
+  in all the responses. So far, its value has always been set to
+  <code>"text/plain"</code>.
+</p>  
+
+<p>  
+  The <code>res.text</code> method not only writes the body, but
+  also sets the <code>"Content-Type"</code> and
+  <code>"Content-Length"</code> headers.
+</p>
+
+<p>  
+  Here are some alternative methods for writing the response body:
+</p>
+
+<pre>
+  res.write <span>"Hello"</span>
+</pre>
+
+<p>
+  The <code>res.write</code> method doesn't alter the
+  <code>"Content-Type"</code> header.
+</p>
+
+<pre>
+  res.html <span>"Hello"</span>
+</pre>
+
+<p>
+  The <code>res.html</code> method sets the <code>"Content-Type"</code>
+  header to <code>"text/html"</code>.
+</p>
+
+<pre>
+  res.json <span>"Hello"</span>
+</pre>
+
+<p>
+  The <code>res.json</code> method sets the <code>"Content-Type"</code>
+  header to <code>"application/json"</code>.
+</p>
+
+<p>
+  Note that aside from writing the response body and setting the
+  value for the Content-Type header, no encoding or serialization
+  takes place. If you want to return a JSON encoded response, make
+  sure to encode the objects yourself (i.e., <code>res.json
+  JSON.dump(...)</code>).
+</p>
 
 <h2>Headers</h2>
 
 <p>
-  We can configure response headers with the <code>res.headers</code> hash:
+  We can configure response headers with the <code>res.headers</code>
+  hash:
 </p>
 
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
+  App = Syro.new do
     get do
-      res.headers[<span>"Content-Type"</span>] = <span>"application/json"</span>
-      res.write <span>"{\"result\":true}"</span>
+      res.headers[<span>"Content-Type"</span>] = <span>"text/markdown"</span>
+      res.write <span>"hello _you_"</span>
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -117,40 +125,39 @@
 
 <pre>
   [200,
-   {<span>"Content-Type"</span>=><span>"application/json"</span>,
-    <span>"Content-Length"</span>=><span>"15"</span>},
-   [<span>"{\"result\":true}"</span>]]
+   {<span>"Content-Type"</span>=&gt;<span>"text/markdown"</span>,
+    <span>"Content-Length"</span>=&gt;<span>"11"</span>},
+   [<span>"hello _you_"</span>]]
 </pre>
 
-<h2>Cookies</h2>
+<h2>Redirects</h2>
 
 <p>
-  Manage cookies with <code>res.set_cookie</code> and <code>res.delete_cookie</code>:
+  You can call <code>res.redirect</code> to take the visitor to a
+  different URL:
 </p>
 
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
+  App = Syro.new do
     get do
-      res.set_cookie(<span>"foo"</span>, <span>"bar"</span>)
-      res.redirect <span>"/admin"</span>
+      res.redirect <span>"/foo"</span>
     end
 
-    on <span>"admin"</span> do
+    on <span>"foo"</span> do
       get do
-        res.delete_cookie(<span>"foo"</span>)
-        res.write req.cookies[<span>"foo"</span>]
+        res.text <span>"GET /foo"</span>
       end
     end
   end
 
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -159,8 +166,56 @@
 
 <pre>
   [302,
-   {<span>"Set-Cookie"</span>=><span>"foo=bar"</span>,
-    <span>"Location"</span>=><span>"/admin"</span>},
+   {<span>"Location"</span>=&gt;<span>"/foo"</span>},
+   []]
+</pre>
+
+<p>
+  Our little application is returning a redirection, which tells
+  browsers to go to a different URL. Soon we will be able to see
+  this result in the browser and it will all make sense.
+</p>
+
+<h2>Cookies</h2>
+
+<p>
+  Manage cookies with <code>res.set_cookie</code> and
+  <code>res.delete_cookie</code>:
+</p>
+
+<pre>
+  require <span>"syro"</span>
+
+  App = Syro.new do
+    get do
+      res.set_cookie(<span>"foo"</span>, <span>"bar"</span>)
+      res.redirect <span>"/admin"</span>
+    end
+
+    on <span>"admin"</span> do
+      get do
+        res.delete_cookie(<span>"foo"</span>)
+        res.text req.cookies[<span>"foo"</span>]
+      end
+    end
+  end
+
+  env = {
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/"</span>,
+  }
+
+  p App.call(env)
+</pre>
+
+<p>
+  Output:
+</p>
+
+<pre>
+  [302,
+   {<span>"Set-Cookie"</span>=&gt;<span>"foo=bar"</span>,
+    <span>"Location"</span>=&gt;<span>"/admin"</span>},
    []]
 </pre>
 
@@ -172,12 +227,12 @@
 
 <pre>
   env = {
-    <span>"REQUEST_METHOD"</span> => <span>"GET"</span>,
-    <span>"PATH_INFO"</span>      => <span>"/admin"</span>,
-    <span>"HTTP_COOKIE"</span>    => <span>"foo=bar"</span>,
+    <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
+    <span>"PATH_INFO"</span>      =&gt; <span>"/admin"</span>,
+    <span>"HTTP_COOKIE"</span>    =&gt; <span>"foo=bar"</span>,
   }
 
-  p app.call(env)
+  p App.call(env)
 </pre>
 
 <p>
@@ -186,9 +241,9 @@
 
 <pre>
   [200,
-   {<span>"Set-Cookie"</span>=><span>"foo=; ..."</span>,
-    <span>"Content-Length"</span>=><span>"3"</span>},
-    <span>"Content-Type"</span>=><span>"text/html"</span>},
+   {<span>"Set-Cookie"</span>=&gt;<span>"foo=; ..."</span>,
+    <span>"Content-Length"</span>=&gt;<span>"3"</span>},
+    <span>"Content-Type"</span>=&gt;<span>"text/plain"</span>},
    [<span>"bar"</span>]]
 </pre>
 

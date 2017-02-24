@@ -8,13 +8,13 @@
 <pre>
   require <span>"syro"</span>
 
-  app = Syro.new do
+  App = Syro.new do
     get do
-      res.write <span>"hello, world"</span>
+      res.text <span>"hello, world"</span>
     end
   end
 
-  run(app)
+  run(App)
 </pre>
 
 <p>
