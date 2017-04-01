@@ -1,6 +1,8 @@
-<h1>4. Matching booleans</h1>
+<h1 lang="en">4. Matching booleans</h1>
 
-<p>
+<h1 lang="fr">4. Matcher des booléens</h1>
+
+<p lang="en">
   So far we have learned how to <a href="ch2.html">match path
   segments</a> with the <code>on</code> method by passing a string,
   and how to <a href="ch3.html">capture path segments</a> by passing
@@ -11,9 +13,24 @@
   evaluate to <code>false</code>
 </p>
 
-<p>
+<p lang="fr">
+  Jusqu'ici on a appris comment <a href="ch2.html">matcher des segments de chemin</a> 
+  avec la méthode <code>on</code> en lui passant une chaîne,
+  et comment <a href="ch3.html">capturer le chemin de segments</a> en lui passant
+  un symbole. Le dernier cas d'utilisation de <code>on</code> c'est d'évaluer
+  l'argument comme un booléen, et de n'exécuter le bloc que si l'argument est<code>true</code>.
+  Notez que je n'ai pas dit "truthy": l'argument doit être égal à <code>true</code>,
+  et tout autre valeur donnera <code>false</code>
+</p>
+
+<p lang="en">
   In the following example, the block will be executed only if the
   visitor arrived from a different website:
+</p>
+
+<p lang="fr">
+  Dans l'exemple suivant, le bloc ne sera exécuté que si le visiteur arrive
+  d'un autre site web :
 </p>
 
 <pre>
@@ -36,8 +53,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Run the code and you will get this output:
+</p>
+
+<p lang="fr">
+ Exécutez le code et vous allez obtenir le résultat suivant :
 </p>
 
 <pre>
@@ -47,12 +68,19 @@
    [<span>"I got http://example.com"</span>]]
 </pre>
 
-<h2>Exercise</h2>
+<h2 lang="en">Exercise</h2>
 
-<p>
+<h2 lang="fr">Exercice</h2>
+
+<p lang="en">
   Combine different matchers, nest them, and modify the <code>env</code>
   variable to get familiar with this approach of building applications.
 </p>
+
+<p lang="en">
+  Combinez différents matchers, imbriquez-les, et modifiez la variable <code>env</code>
+  pour vous familiariser avec cette approche de construction d'applications.
+  </p>
 
 <br>
 
