@@ -1,8 +1,12 @@
 <h1>1. Hello World!</h1>
 
-<p>
+<p lang="en">
   Open a file called <code>app.rb</code> and type the following
   code:
+</p>
+
+<p lang="fr">
+  Ouvrez un fichier appelé <code>app.rb</code> et entrez le code suivant :
 </p>
 
 <pre>
@@ -15,18 +19,28 @@
   end
 </pre>
 
-<p>
+<p lang="en">
   You can run the code with Ruby:
+</p>
+
+<p lang="fr">
+  Vouz pouvez exécuter le code avec Ruby :
 </p>
 
 <pre>
   ruby ./app.rb
 </pre>
 
-<p>
+<p lang="en">
   But as expected, you won't see any output. A Syro app can be
   called by passing a hash with CGI variables, so let's give it a
-  try.  Append the following code to the file:
+  try. Append the following code to the file:
+</p>
+
+<p lang="fr">
+  Mais comme prévu, vous n'allez voir aucun résultat. Une app Syro peut être
+  appelée en lui passant le hash avec les variables CGI, essayons donc ça. 
+  Ajoutez le code suivant au fichier :
 </p>
 
 <pre>
@@ -38,8 +52,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   If you run the code again, you will get this output:
+</p>
+
+<p lang="fr">
+  Si vous exécutez le code encore une fois, vous allez obtenir le résultat suivant :
 </p>
 
 <pre>
@@ -49,12 +67,17 @@
    [<span>"hello, world"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   If you are familiar with Rack, you will recognize the output.  If
   not, reading about Rack will come handy later on.
 </p>
 
-<p>
+<p lang="fr">
+  Si vous êtes familiarisé avec Rack, vous allez reconnaître le résultat. 
+  Si ce n'est pas le cas, une lecture sur Rack pourra vous être utile plus tard.
+</p>
+
+<p lang="en">
   You can see that the body of the response contained the string
   <code>"hello, world"</code>. That's because the block that was passed to
   <code>get</code> was executed. When <code>get</code> is called,
@@ -67,17 +90,41 @@
   response was generated and returned.
 </p>
 
-<p>
+<p lang="fr">
+  Vous pouvez constater que le corps de la réponse contenait la chaîne
+  <code>"hello, world"</code>. C'est parce que le bloc qui a été transmis à
+  <code>get</code> a été executé. Lorsque <code>get</code> est appelé,
+  il vérifie deux choses : d'abord, il s'assure que <code>REQUEST_METHOD</code> 
+  est bien <code>"GET"</code>; après il vérifie <code>"PATH_INFO"</code>
+  pour voir si l'on est bien à la fin du chemin.
+  Le terminal <code>"/"</code> est consideré la fin du chemin,
+  et comme <code>REQUEST_METHOD</code> a été définie sur <code>"GET"</code>
+  le bloc passé à <code>get</code> a été evalué. Enfin, la résponse a été
+  générée et retournée.
+</p>
+
+<p lang="en">
   We will see later how to run this code with a webserver, but for
   now it's better to get familiar with the underlying mechanics.
 </p>
 
+<p lang="fr">
+  Nous verrons plus tard comment exécuter ce code avec un webserver,
+  mais pour le moment c'est mieux de se familiariser avec les mécaniques sous-jacentes.
+</p>
+
 <h2>Exercise</h2>
 
-<p>
+<p lang="en">
   Change the value of <code>REQUEST_METHOD</code> and run the program
   again. Does it work as expected? Change the value of
   <code>PATH_INFO</code>, run it again. What happens?
+</p>
+
+<p lang="fr">
+  Changez la valeur de <code>REQUEST_METHOD</code> et exécutez le programme
+  à nouveau. Ça ne marche pas comme attendu ? Changez la valeur de <code>PATH_INFO</code>,
+  exécutez-le à nouveau. Que s'est il passé ?
 </p>
 
 <br>
