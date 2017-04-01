@@ -1,14 +1,27 @@
-<h1>5. Composing applications</h1>
+<h1 lang="en">5. Composing applications</h1>
 
-<p>
+<h1 lang="fr">5. Composer des applications</h1>
+
+<p lang="en">
   The pilars for scalability are simplicity and modularity. With
   Syro you can achieve both, and in this chapter we will explore
   how applications can be mounted on top of other applications.
 </p>
 
-<p>
+<p lang="fr">
+  Les piliers de la scalabilité sont la simplicité et la modularité.
+  Avec Syro vous pouvez accomplir les deux, et dans ce chapitre nous allons explorer
+  comment des applications peuvent être montées par dessus d'autres.
+</p>
+
+<p lang="en">
   In the following example, we will use a different application if
   the visitor tries to access <code>"/admin"</code>:
+</p>
+
+<p lang="fr">
+  Dans l'exemple suivant, nous allons utiliser une application différente
+  si le visiteur essayer d'acceder à <code>"/admin"</code>:
 </p>
 
 <pre>
@@ -34,8 +47,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -45,11 +62,18 @@
    [<span>"Got /admin"</span>]]
 </pre>
 
-<h2>Sharing information between apps</h2>
+<h2 lang="en">Sharing information between apps</h2>
 
-<p>
+<h2 lang="fr">Partager des informations entre apps</h2>
+
+<p lang="en">
   When mounting an application, you can provide a hash that will
   become the inbox of the mounted app:
+</p>
+
+<p lang="fr">
+  Quand vous montez une application, vous pouvez fournir un hash
+  qui deviendra l'inbox de l'app montée :
 </p>
 
 <pre>
@@ -75,8 +99,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -86,12 +114,20 @@
    [<span>"Got /admin"</span>]]
 </pre>
 
-<h2>Exercise</h2>
+<h2 lang="en">Exercise</h2>
 
-<p>
+<h2 lang="fr">Exercice</h2>
+
+<p lang="en">
   Can you mount the same app at two different places? Can you mount
   an app on a mounted app? Remember to modify <code>PATH_INFO</code>
   to access different matchers.
+</p>
+
+<p lang="fr">
+  Pouvez-vous monter la même app à deux endroits différents ? Pouvez-vous monter
+  une app sur une app montée ? N'oubliez pas de modifier <code>PATH_INFO</code>
+  pour acceder à différents matchers.
 </p>
 
 <br>
