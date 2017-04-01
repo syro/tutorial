@@ -4,6 +4,10 @@
     <title>TITLE</title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script type="text/javascript" src="js/int.js"></script>
+    <script>
+      int = new Int({ default_locale: 'en', available_locales: ['en', 'fr'] });
+    </script>
     <link href="css/index.css" rel="stylesheet" type="text/css" />
     <link
       href="http://fonts.googleapis.com/css?family=Inconsolata:400,600|Fredoka One"
@@ -15,6 +19,20 @@
       <a href="index.html">Syro</a>
     </header>
     <section>
+      <nav>
+        <p lang="en">
+          EN
+          |
+          <a href="#" onclick="int.toggle('fr')">FR</a>
+        </p>
+
+        <p lang="fr">
+          <a href="#" onclick="int.toggle('en')">EN</a>
+          |
+          FR
+        </p>
+      </nav>
+
       m4_include(CONTENT)
     </section>
     <footer>

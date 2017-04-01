@@ -28,6 +28,14 @@ section {
   width: 30em;
 }
 
+section nav {
+  font-family: "Inconsolata", monospace;
+  font-size: 80%;
+  position: absolute;
+  top: 1em;
+  right: calc(100% - (320px + 36rem));
+}
+
 section h1 {
   font-weight: normal;
   font-size: 1.8em;
@@ -55,14 +63,14 @@ section a {
 }
 
 section p code {
-  font-family: "Inconsolata";
+  font-family: "Inconsolata", monospace;
   padding: 0 0.2em;
   background-color: #fff;
   border: 1px solid #eee;
 }
 
 section pre {
-  font-family: "Inconsolata";
+  font-family: "Inconsolata", monospace;
   padding: 1em 0;
   background-color: #fff;
   border: 1px solid #eee;
