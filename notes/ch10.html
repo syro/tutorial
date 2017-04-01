@@ -1,6 +1,8 @@
-<h1>10. Customizations</h1>
+<h1 lang="en">10. Customizations</h1>
 
-<p>
+<h1 lang="fr">10. Personnalisations</h1>
+
+<p lang="en">
   Every Syro application we have developed so far is evaluated in
   the context of an instance of <code>Syro::Deck</code>. That class
   provides all the methods we have seen so far (i.e., <code>on</code>,
@@ -10,8 +12,22 @@
   <code>options</code>, <code>res</code> and <code>req</code>).
 </p>
 
-<p>
+<p lang="fr">
+  Chaque application Syro qu'on a développé jusqu'ici est évaluée
+  dans le contexte d'une instance de <code>Syro::Deck</code>. Cette classe
+  fournit toutes les méthodes que nous avons vue jusqu'ici (ex. <code>on</code>,
+  <code>root</code>, <code>run</code>, <code>inbox</code>,
+  <code>get</code>, <code>put</code>, <code>head</code>,
+  <code>post</code>, <code>patch</code>, <code>delete</code>,
+  <code>options</code>, <code>res</code> et <code>req</code>).
+</p>
+
+<p lang="en">
   You can create your own Decks and add some methods of your own:
+</p>
+
+<p lang="fr">
+  Vous pouvez créer vos propres Decks et ajouter vos propres méthodes :
 </p>
 
 <pre>
@@ -38,8 +54,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -49,16 +69,30 @@
    [<span>"{\"result\":true}"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   If you need a JSON API, that's more or less the way to go.
 </p>
 
-<h2>Default headers</h2>
+<p lang="fr">
+  Si vous avez besoin d'une API JSON, c'est plus ou moins le chemin à suivre.
+</p>
 
-<p>
+
+<h2 lang="en">Default headers</h2>
+
+<h2 lang="fr">Entêtes par défaut</h2>
+
+
+<p lang="en">
   You can configure the default headers for your application by
   redefining the <code>default_headers</code> method. Here's a new
   version of the <code>API</code> Deck.
+</p>
+
+<p lang="fr">
+  Vous pouvez configurer les entêtes par défaut pour vos applications
+  en redéfinissant la méthode <code>default_headers</code>. Voici une
+  nouvelle version du Deck <code>API</code>.
 </p>
 
 <pre>
@@ -96,8 +130,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -113,18 +151,30 @@
    [<span>"{\"result\":true}"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   Now the security related headers are included in all responses.
 </p>
 
-<h2>Custom Response and Request classes</h2>
+<p lang="fr">
+  Maintenant, les entêtes liés à la sécurité sont inclus dans toutes les réponses.</p>
 
-<p>
+<h2 lang="en">Custom Response and Request classes</h2>
+
+<h2 lang="fr">Réponse personnalisée et classes Requête</h2>
+
+<p lang="en">
   The <code>res</code> and <code>req</code> objects are instances
   of <code>Syro::Response</code> and <code>Rack::Request</code>
   respectively. If you want to provide your own classes, you can
   redefine the <code>response_class</code> and <code>request_class</code>
   methods:
+</p>
+
+<p lang="fr">
+  Les objets <code>res</code> et <code>req</code> sont des instances de
+  <code>Syro::Response</code> et <code>Rack::Request</code>
+  respectivement. Si vous voulez fournir vos propres classes, vous pouvez
+  redefinir les méthodes <code>response_class</code> et <code>request_class</code> :
 </p>
 
 <pre>
@@ -160,8 +210,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -171,10 +225,16 @@
    [<span>"MyRequest"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   You can reuse the same Deck in different applications and combine
   functionality by mixing in several modules. There are no limits
   really.
+</p>
+
+<p lang="fr">
+  Vous pouvez réutiliser le même Deck dans differentes applications
+  et combiner des fonctionnalités en mélangeant differents modules. Il n'y a vraiment pas
+  de limites.
 </p>
 
 <br>
