@@ -1,16 +1,32 @@
-<h1>8. The response object</h1>
+<h1 lang="en">8. The response object</h1>
 
-<p>
+<h1 lang="fr">8. La réponse objet</h1>
+
+<p lang="en">
   We have been using <code>res.text</code> in all the examples,
   and now we will discover what other methods we can call on
   <code>res</code>.
 </p>
 
-<h2>Status codes</h2>
+<p lang="fr">
+  Nous avons utilisé <code>res.text</code> dans tous les exemples,
+  et maintenant nous allons découvrir quelles autres méthodes nous pouvons
+  appeler dans <code>res</code>.
+</p>
 
-<p>
+<h2 lang="en">Status codes</h2>
+
+<h2 lang="fr">Codes des status</h2>
+
+
+<p lang="en">
   We can get or set the status code of the response by using the
   accessor <code>res.status</code>:
+</p>
+
+<p lang="fr">
+  Nous pouvons obtenir ou mettre en place les codes des statuts
+  de la réponse en utilisant l'acceseur <code>res.status</code>:
 </p>
 
 <pre>
@@ -31,8 +47,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -41,52 +61,85 @@
    [<span>"Not implemented yet!"</span>]]
 </pre>
 
-<h2>Content type</h2>
+<h2 lang="en">Content type</h2>
 
-<p>
+<h2 lang="fr">Type de contenu</h2>
+
+
+<p lang="en">
   You may have noticed the <code>Content-Type</code> header included
   in all the responses. So far, its value has always been set to
   <code>"text/plain"</code>.
 </p>  
 
-<p>  
+<p lang="fr">
+  Vous avez sûrement remarqué l'entête <code>Content-Type</code> inclu
+  dans toutes les réponses. Jusqu'ici, sa valeur a toujours
+  été <code>"text/plain"</code>.
+</p>  
+
+<p lang="en">  
   The <code>res.text</code> method not only writes the body, but
   also sets the <code>"Content-Type"</code> and
   <code>"Content-Length"</code> headers.
 </p>
 
-<p>  
+<p lang="fr">  
+  La méthode <code>res.text</code> non seulement écrit le corps, 
+  mais configure en plus les entêtes de <code>"Content-Type"</code>
+  et de <code>"Content-Length"</code>.
+</p>
+
+<p lang="en">  
   Here are some alternative methods for writing the response body:
 </p>
+
+<p lang="fr">  
+  Voici quelques méthodes alternatives pour écrire la réponse du corps</p>
 
 <pre>
   res.write <span>"Hello"</span>
 </pre>
 
-<p>
+<p lang="en">
   The <code>res.write</code> method doesn't alter the
   <code>"Content-Type"</code> header.
+</p>
+
+<p lang="fr">
+  La méthode <code>res.write</code> n'altère pas
+  l'entête <code>"Content-Type"</code>.
 </p>
 
 <pre>
   res.html <span>"Hello"</span>
 </pre>
 
-<p>
+<p lang="en">
   The <code>res.html</code> method sets the <code>"Content-Type"</code>
   header to <code>"text/html"</code>.
+</p>
+
+<p lang="fr">
+  La méthode <code>res.html</code> configure l'entête <code>"Content-Type"</code>
+  à <code>"text/html"</code>.
 </p>
 
 <pre>
   res.json <span>"Hello"</span>
 </pre>
 
-<p>
+<p lang="en">
   The <code>res.json</code> method sets the <code>"Content-Type"</code>
   header to <code>"application/json"</code>.
 </p>
 
-<p>
+<p lang="fr">
+  La méthode <code>res.json</code> configure l'entête <code>"Content-Type"</code>
+ à <code>"application/json"</code>.
+</p>
+
+<p lang="en">
   Note that aside from writing the response body and setting the
   value for the Content-Type header, no encoding or serialization
   takes place. If you want to return a JSON encoded response, make
@@ -94,11 +147,26 @@
   JSON.dump(...)</code>).
 </p>
 
-<h2>Headers</h2>
+<p lang="fr">
+  Notez que, mis appart l'écriture de la réponse du corps et la
+  configuration de la valeur pour l'entête Content-Type, aucun encodage
+  ou sérialisation n'aura lieu. Si vous voulez retourner une
+  réponse encodée JSON, assurez-vous d'encoder vous mêmes les objets
+  (ex. <code>res.json JSON.dump(...)</code>).
+</p>
 
-<p>
+<h2 lang="en">Headers</h2>
+
+<h2 lang="fr">Entêtes</h2>
+
+<p lang="en">
   We can configure response headers with the <code>res.headers</code>
   hash:
+</p>
+
+<p lang="fr">
+  Nous pouvons configurer des entêtes de réponse
+  avec le hash <code>res.headers</code> :
 </p>
 
 <pre>
@@ -119,8 +187,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -130,11 +202,19 @@
    [<span>"hello _you_"</span>]]
 </pre>
 
-<h2>Redirects</h2>
+<h2 lang="en">Redirects</h2>
 
-<p>
+<h2 lang="fr">Redirections</h2>
+
+
+<p lang="en">
   You can call <code>res.redirect</code> to take the visitor to a
   different URL:
+</p>
+
+<p lang="fr">
+  Vous pouvez appeler <code>res.redirect</code> pour amener
+  le visiteur vers une URL différente :
 </p>
 
 <pre>
@@ -160,9 +240,14 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
 </p>
+
+<p lang="fr">
+  Résultat :
+</p>
+
 
 <pre>
   [302,
@@ -170,16 +255,28 @@
    []]
 </pre>
 
-<p>
+<p lang="en">
   Our little application is returning a redirection, which tells
   browsers to go to a different URL. Soon we will be able to see
   this result in the browser and it will all make sense.
 </p>
 
+<p lang="fr">
+  Notre petite application retournera une redirection qui dira
+  au navigateur d'aller vers une URL différente. Bientôt, nous
+  serons capables de voir ce résultat dans le navigateur
+  et tout cela aura du sens.
+</p>
+
 <h2>Cookies</h2>
 
-<p>
+<p lang="en">
   Manage cookies with <code>res.set_cookie</code> and
+  <code>res.delete_cookie</code>:
+</p>
+
+<p lang="fr">
+  Gérez les cookies avec <code>res.set_cookie</code> et
   <code>res.delete_cookie</code>:
 </p>
 
@@ -208,8 +305,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -219,10 +320,16 @@
    []]
 </pre>
 
-<p>
+<p lang="en">
   We got a redirection and a cookie header. We can now simulate
   what the browser will do in order to follow the redirect. Append
   the code below:
+</p>
+
+<p lang="fr">
+  Nous avons obtenu une redirection et un entête cookie. Maintenant
+  nous pouvons simuler ce que le navigateur ferait pour suivre
+  la redirection. Ajoutez le code ci-dessous :
 </p>
 
 <pre>
@@ -235,8 +342,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -247,9 +358,14 @@
    [<span>"bar"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   Part of <code>Set-Cookie</code> was ommited in the example, but
   it has to do with expiring the <code>foo</code> cookie.
+</p>
+
+<p lang="fr">
+  Une partie du <code>Set-Cookie</code> a été omise dans l'exemple,
+  mais il s'agit d'expirer la cookie <code>foo</code>.
 </p>
 
 <br>
