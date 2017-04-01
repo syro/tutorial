@@ -1,14 +1,27 @@
-<h1>3. Capturing path segments</h1>
+<h1 lang="en">3. Capturing path segments</h1>
 
-<p>
+<h1 lang="en">3. Capturer le chemin de segments</h1>
+
+<p lang="en">
   In the <a href="ch2.html">previous chapter</a> we discovered how
   to match path segments with the <code>on</code> method. Now we
   will see how to capture the value of a segment and store it in a
   hash called <code>inbox</code> for later use.
 </p>
 
-<p>
+<p lang="fr">
+  Dans le <a href="ch2.html">chapitre précédent</a> nous avons
+  découvert comment matcher des chemins de segments avec la méthode <code>on</code>.
+  Maintenant nous allons voir comment capturer la valeur d'un segment et la stocker
+  dans un hash appellé <code>inbox</code> pour l'utiliser plus tard.
+</p>
+
+<p lang="en">
   Let's consider this value for <code>PATH_INFO</code>:
+</p>
+
+<p lang="fr">
+  Prenons cette valeur pour <code>PATH_INFO</code>:
 </p>
 
 <pre>
@@ -18,9 +31,14 @@
   }
 </pre>
 
-<p>
+<p lang="en">
   Here's the code to match the segment <code>"hello"</code> and
   capture the segment <code>"world"</code>:
+</p>
+
+<p lang="fr">
+  Voici le code qui matche avec le segment <code>"hello"</code> et
+  qui capture le segment <code>"world"</code>:
 </p>
 
 <pre>
@@ -44,8 +62,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Run the code and you will get this output:
+</p>
+
+<p lang="fr">
+  Exécutez le code et vous allez obtenir le résultat suivant :
 </p>
 
 <pre>
@@ -55,13 +77,22 @@
    [<span>"Hello world"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   The captured value gets stored in the <code>inbox</code> hash
   under the key passed to <code>on</code>.
 </p>
 
-<p>
+<p lang="fr">
+  La valeur capturée est stockée dans le hash <code>inbox</code>
+  sous la clé donnée à <code>on</code>.
+</p>
+
+<p lang="en">
   What if we try a name other than "world"?
+</p>
+
+<p lang="en">
+  Et si nous essayons avec un nom autre que "world" ?
 </p>
 
 <pre>
@@ -80,12 +111,20 @@
    [<span>"Hello there"</span>]]
 </pre>
 
-<h2>Exercise</h2>
+<h2 lang="en">Exercise</h2>
 
-<p>
+<h2 lang="fr">Exercice</h2>
+
+<p lang="en">
   Change the value of <code>PATH_INFO</code> to
   <code>"/hello/there/world"</code> and modify the calls to
   <code>on</code> to match each segment.
+</p>
+
+<p lang="en">
+  Changez la valeur de <code>PATH_INFO</code> par
+  <code>"/hello/there/world"</code> et modifiez les appels à
+  <code>on</code> pour les faire matcher avec chaque segment.
 </p>
 
 <br>
