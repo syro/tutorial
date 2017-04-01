@@ -1,15 +1,30 @@
-<h1>7. Request methods</h1>
+<h1 lang="en">7. Request methods</h1>
 
-<p>
+<h1 lang="fr">7. Méthodes de requête</h1>
+
+
+<p lang="en">
   Syro directly supports matchers for the request methods
   <code>get</code>, <code>put</code>, <code>head</code>,
   <code>post</code>, <code>patch</code>, <code>delete</code>
   and <code>options</code>.
 </p>
 
-<p>
+<p lang="fr">
+  Syro supporte directement des matchers pour les méthodes de requête
+  <code>get</code>, <code>put</code>, <code>head</code>,
+  <code>post</code>, <code>patch</code>, <code>delete</code>
+  et <code>options</code>.
+</p>
+
+<p lang="en">
   The following example responds differently to each verb, even if
   the path remains the same:
+</p>
+
+<p lang="fr">
+  L'exemple suivant répond de manière différente pour chaque verbe,
+  même si le chemin reste invariable :
 </p>
 
 <pre>
@@ -55,8 +70,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat:
 </p>
 
 <pre>
@@ -66,17 +85,29 @@
    [<span>"DELETE /foo"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   As explained in <a href="ch2.html">Chapter 2</a>, we are not only
   matching the <code>REQUEST_METHOD</code>, but we are also asserting
   that there are no segments left to be matched.
 </p>
 
-<p>
+<p lang="fr">
+  Comme expliqué dans le <a href="ch2.html">Chapitre 2</a>, on ne fait pas
+  que matcher le <code>REQUEST_METHOD</code>, mais on affirme aussi
+  qu'il ne reste aucun segment à matcher.
+</p>
+
+<p lang="en">
   There are more HTTP methods than what we covered in Syro. If you
   need some other method, you can always use <code>on</code> to
   match a boolean (more information in <a href="ch9.html">Chapter
   9</a>):
+</p>
+
+<p lang="fr">
+  Il existe plus des méthodes HTTP que celles traité par Syro. Si vous
+  en avez besoin, vous pouvez toujours utiliser <code>on</code>
+  pour matcher un booléen (plus d'infos dans le <a href="ch9.html">Chapitre 9</a>) :
 </p>
 
 <pre>
@@ -100,8 +131,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat:
 </p>
 
 <pre>
@@ -111,17 +146,30 @@
    [<span>"TRACE /foo"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   Note that we had to call <code>root</code> to make sure there are
   no extra segments in the path.
 </p>
 
-<h2>Exercise</h2>
+<p lang="fr">
+  Notez qu'on a dû appeler <code>root</code> pour être sûrs 
+  de ne pas avoir de segments supplémentaires dans le chemin.
+</p>
 
-<p>
+<h2 lang="en">Exercise</h2>
+
+<h2 lang="fr">Exercice</h2>
+
+<p lang="en">
   Remove the call to <code>root</code> but leave the call to
   <code>res.text</code>. Do you get the same output? Now modify
   <code>PATH_INFO</code>. What happens?
+</p>
+
+<p lang="fr">
+  Retirez l'appel à <code>root</code> mais laissez l'appel à
+  <code>res.text</code>. Avez-vous obtenu le même résultat ? Maintenant
+  modifiez <code>PATH_INFO</code>. Que s'est-il passé ?
 </p>
 
 <br>
