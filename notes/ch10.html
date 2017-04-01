@@ -34,7 +34,7 @@
   require <span>"syro"</span>
   require <span>"json"</span>
 
-  class API < Syro::Deck
+  class API &lt; Syro::Deck
     def json(object)
       res.json JSON.dump(object)
     end
@@ -99,7 +99,7 @@
   require <span>"syro"</span>
   require <span>"json"</span>
 
-  class API < Syro::Deck
+  class API &lt; Syro::Deck
     def default_headers
       {
         <span>"X-Content-Type-Options"</span>    =&gt; <span>"nosniff"</span>,
@@ -180,13 +180,13 @@
 <pre>
   require <span>"syro"</span>
 
-  class MyResponse < Syro::Response
+  class MyResponse &lt; Syro::Response
   end
 
-  class MyRequest < Rack::Request
+  class MyRequest &lt; Rack::Request
   end
 
-  class MyDeck < Syro::Deck
+  class MyDeck &lt; Syro::Deck
     def response_class
       MyResponse
     end
