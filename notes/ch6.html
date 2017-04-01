@@ -1,16 +1,30 @@
-<h1>6. Inspecting the path</h1>
+<h1 lang="en">6. Inspecting the path</h1>
 
-<p>
+<h1 lang="fr">6. Examiner le chemin</h1>
+
+
+<p lang="en">
   We mentioned early on that Syro can match and capture path segments,
   but how exactly?  In this chapter we will examine the <code>path</code>
   object to see how it keeps track of the current and previous
   paths.
 </p>
 
-<p>
+<p lang="fr">
+  Nous avons déjà mentionné que Syro peut capturer des segments du chemin,
+  mais comment au juste ? Dans ce chapitre nous allons examiner l'objet <code>path</code>
+  pour voir comment il garde le registre des chemins actuels et précédents.
+</p>
+
+<p lang="en">
   The following example builds the response gradually. That is, it
   uses <code>res.text</code> more than once, and the response
   contains an array of the successive calls.
+</p>
+
+<p lang="fr">
+  L'exemple suivant construit la réponse de manière graduelle. C'est à dire, on utilise
+  <code>res.text</code> plus d'une fois et la réponse contient un tableau des appels successifs.
 </p>
 
 <pre>
@@ -36,8 +50,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -47,21 +65,38 @@
    [<span>"|/foo/bar"</span>, <span>"/foo|/bar"</span>, <span>"/foo/bar|"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   While building the response, we put a pipe at the position where
   <code>path.prev</code> and <code>path.curr</code> would be joined.
   As the path segments were matched, parts of <code>path.curr</code>
   were moved to <code>path.prev</code>. Each call to <code>on</code>
   uses the current version of the path (<code>path.curr</code>) and
-  ignores the rest.  That is what allows Syro to match successive
+  ignores the rest. That is what allows Syro to match successive
   segments with nested blocks.
 </p>
 
-<h2>Exercise</h2>
+<p lang="fr">
+  Quand on construisait la réponse, on a mis une barre verticale à l'endroit où
+  se rejoignent <code>path.prev</code> et <code>path.curr</code>.
+  Au fur et à mesure que des segments de chemin sont matchés, des parties de
+  <code>path.curr</code> sont déplacées à <code>path.prev</code>. Chaque appel
+  à <code>on</code> utilise la version actuelle du chemin (<code>path.curr</code>) 
+  et ignore le reste. C'est cela qui permet à Syro de matcher successivement
+  des segments avec des blocs imbriqués.
+</p>
 
-<p>
+<h2 lang="en">Exercise</h2>
+
+<h2 lang="fr">Exercice</h2>
+
+<p lang="en">
   Replace some matcher with a capture by using a symbol. How does
   it behave?
+</p>
+
+<p lang="fr">
+  Remplacez un matcher par une capture en utilisant un symbole.
+  Quel a été le comportement ?
 </p>
 
 <br>
