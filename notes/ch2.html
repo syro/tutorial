@@ -1,8 +1,15 @@
-<h1>2. Matching path segments</h1>
+<h1 lang="en">2. Matching path segments</h1>
 
-<p>
+<h1 lang="fr">2. Matchant des segments de chemin</h1>
+
+<p lang="en">
   In the tradition of libraries like Cuba and Rum, Syro lets you
   match segments of the path. Consider this example:
+</p>
+
+<p lang="fr">
+  Suivant la tradition de bibliothèques comme Cuba et Rum, Syro vous permet
+  de matcher des segments de chemin. Prenons cet exemple :
 </p>
 
 <pre>
@@ -12,10 +19,16 @@
   }
 </pre>
 
-<p>
+<p lang="en">
   In the example <code>env</code> hash, <code>foo</code>,
   <code>bar</code> and <code>baz</code> are what we call segments.
   Let's see how we can match those segments in our app:
+</p>
+
+<p lang="en">
+  Dans l'exemple du hash <code>env</code>, <code>foo</code>,
+  <code>bar</code> et <code>baz</code> sont ce qu'on appelle des segments.
+  Voyons comment on peut matcher ces segments dans notre app :
 </p>
 
 <pre>
@@ -45,8 +58,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Run the code and you will get this output:
+</p>
+
+<p lang="fr">
+  Exécutez le code et vous allez obtenir le résultat suivant :
 </p>
 
 <pre>
@@ -56,7 +73,7 @@
    [<span>"Hello world!"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   Note that we use <code>get</code> to indicate that we are targetting
   the <code>"GET"</code> request method, but also that there are
   no segments left to be matched. For example, the first call to
@@ -67,12 +84,28 @@
   nested <code>get</code> matches.
 </p>
 
+<p lang="fr">
+  Notez que nous utilisons <code>get</code> pour indiquer que nous ciblons
+  la méthode de requête <code>"GET"</code>, mais aussi qu'il ne reste pas
+  de segments à parcourir. Par exemple, ce premier appel à 
+  <code>get</code> ne déclenche pas l'exécution du bloc,
+  parce qu'à ce point le chemin contient encore les segments <code>"foo/bar/baz"</code>.
+  Ce n'est que quand les appels à <code>on</code> parcourent ces segments qu'on atteint
+  la fin du chemin, et le <code>get</code> imbriqué est vérifié.
+</p>
+
 <h2>Exercise</h2>
 
-<p>
+<p lang="en">
   Change the value of <code>PATH_INFO</code> and run the program
   again. Does it work as expected? Adapt the calls to <code>on</code>
   to match the new value for <code>PATH_INFO</code>.
+</p>
+
+<p lang="fr">
+  Changez la valeur de <code>PATH_INFO</code> et exécutez le programme à nouveau.
+  Est-ce que ça marche comme attendu ? Adaptez les appels à <code>on</code>
+  pour les faire matcher avec la nouvelle valeur de <code>PATH_INFO</code>.
 </p>
 
 <br>
