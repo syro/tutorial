@@ -1,6 +1,8 @@
-<h1>9. The request object</h1>
+<h1 lang="en">9. The request object</h1>
 
-<p>
+<h1 lang="fr">9. La requête objet</h1>
+
+<p lang="en">
   The <code>req</code> object comes from Rack, and it includes many
   helper methods for querying the values of <code>env</code>. Below
   you will find some of its features. To see every option, refer
@@ -8,11 +10,26 @@
   documentation</a>.
 </p>
 
-<h2>Request methods</h2>
+<p lang="fr">
+  The <code>req</code> object comes from Rack, and it includes many
+  helper methods for querying the values of <code>env</code>. Below
+  you will find some of its features. To see every option, refer
+  to <a href="http://www.rubydoc.info/github/rack/rack/Rack/Request">Rack's
+  documentation</a>.
+</p>
 
-<p>
+<h2 lang="en">Request methods</h2>
+
+<h2 lang="fr">Méthodes de requête</h2>
+
+<p lang="en">
   You can query the value of <code>REQUEST_METHOD</code> with these
   helpers:
+</p>
+
+<p lang="fr">
+  Vous pouvez interroger la valeur <code>REQUEST_METHOD</code> avec
+  ces helpers :
 </p>
 
 <pre>
@@ -41,15 +58,26 @@
   req.options?
 </pre>
 
-<p>
+<p lang="en">
   As the return values are booleans, you can use them with the
   <code>on</code> method.
 </p>
 
-<h2>Parameters</h2>
+<p lang="fr">
+  As the return values are booleans, you can use them with the
+  <code>on</code> method.
+</p>
 
-<p>
+<h2 lang="en">Parameters</h2>
+
+<h2 lang="fr">Paramètres</h2>
+
+<p lang="en">
   Access any parameter sent with <code>req.params</code>:
+</p>
+
+<p lang="fr">
+  Accedez à n'importe quel paramètre envoyé avec <code>req.params</code>:
 </p>
 
 <pre>
@@ -71,8 +99,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -82,17 +114,28 @@
    [<span>"bar"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   We had to add an extra request header for <code>rack.input</code>,
   otherwise Rack would have complained that it couldn't read it.
   When using a webserver and a browser, you won't need to take those
   subtleties into account.
 </p>
 
+<p lang="fr">
+  Nous avons dû ajouter un entête de requête supplémentaire pour<code>rack.input</code>,
+  sinon Rack se serait plaint de ne pas pouvoir le lire.
+  Lorsqu'on utilise un serveur web et un navigateur, on n'aura pas besoin de prendre
+  en compte ces subtilités.
+</p>
+
 <h2>Cookies</h2>
 
-<p>
+<p lang="en">
   Access the cookies with <code>req.cookies</code>:
+</p>
+
+<p lang="fr">
+  Accedez aux cookies avec <code>req.cookies</code>:
 </p>
 
 <pre>
@@ -113,8 +156,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -124,10 +171,16 @@
    [<span>"bar"</span>]]
 </pre>
 
-<p>
+<p lang="en">
   Refer to <a
   href="http://www.rubydoc.info/github/rack/rack/Rack/Request">Rack's
   documentation</a> to see what else you can do.
+</p>
+
+<p lang="fr">
+  Reportez-vous à <a
+  href="http://www.rubydoc.info/github/rack/rack/Rack/Request">Rack's
+  documentation</a> pour voir quoi d'autre vous pouvez faire.
 </p>
 
 <br>
