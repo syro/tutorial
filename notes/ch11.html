@@ -1,13 +1,25 @@
-<h1>11. Rendering templates</h1>
+<h1 lang="en">11. Rendering templates</h1>
 
-<p>
+<h1 lang="fr">11. Rendu de templates</h1>
+
+<p lang="en">
   For this chapter we will use <a
   href="https://github.com/soveran/mote">Mote</a>, a very simple
   and powerful template engine.
 </p>
 
-<p>
+<p lang="fr">
+  Pour ce chapitre nous allons utiliser <a
+  href="https://github.com/soveran/mote">Mote</a>, un moteur
+  de templates très simple et puissant.
+</p>
+
+<p lang="en">
   Save this template to <code>"./views/index.mote"</code>:
+</p>
+
+<p lang="fr">
+  Sauvegardez ce template à <code>"./views/index.mote"</code>:
 </p>
 
 <pre>
@@ -22,8 +34,13 @@
   &lt;/html&gt;</span>
 </pre>
 
-<p>
+<p lang="en">
   Now let's create a custom Deck with methods for rendering the template.
+</p>
+
+<p lang="fr">
+  Maintenant, créez un Deck personnalisé avec des méthodes
+  pour le rendu de templates.
 </p>
 
 <pre>
@@ -56,8 +73,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -67,14 +88,25 @@
    [<span>"&lt;!DOCTYPE html&gt;..."</span>]]
 </pre>
 
-<p>
+<p lang="en">
   Most of the body was ommited in the example, but you should be
   able to see how the variables in the template got the right values.
 </p>
 
-<p>
+<p lang="fr">
+  La plupart du corps a été omise dans l'exemple, mais vous devriez
+  être capable de voir comment les variables dans le template
+  ont reçu les bonnes valeurs.
+</p>
+
+<p lang="en">
   Rename <code>index.mote</code> to <code>layout.mote</code>, and
   create the file <code>index.mote</code> with the following content:
+</p>
+
+<p lang="fr">
+  Renommez <code>index.mote</code> par <code>layout.mote</code>, et
+  créez le fichier <code>index.mote</code> avec le contenu suivant :
 </p>
 
 <pre>
@@ -82,8 +114,12 @@
   &lt;p&gt;<b>{{content}}</b>&lt;/p&gt;</span>
 </pre>
 
-<p>
+<p lang="en">
   We can now modify our Deck to include layouts and partials.
+</p>
+
+<p lang="fr">
+  Nous pouvons modifier notre Deck pour inclure des layouts et des partiels.
 </p>
 
 <pre>
@@ -122,8 +158,12 @@
   p App.call(env)
 </pre>
 
-<p>
+<p lang="en">
   Output:
+</p>
+
+<p lang="fr">
+  Résultat :
 </p>
 
 <pre>
@@ -133,10 +173,16 @@
    [<span>"&lt;!DOCTYPE html&gt;..."</span>]]
 </pre>
 
-<p>
+<p lang="en">
   Again, most of the body was ommited in the output, but you should
   be able to see how the template was inserted in the layout, and
   all the variables were replaced with the supplied values.
+</p>
+
+<p lang="fr">
+  Encore une fois, la plupart du corps a été omise, mais vous devriez
+  être capable de voir comment le modèle a été inséré dans le layout, et
+  toutes les variables ont été remplacées par les valeurs données.
 </p>
 
 <br>
