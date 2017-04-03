@@ -6,7 +6,8 @@
 </p>
 
 <p lang="fr">
-  Ouvrez un fichier appelé <code>app.rb</code> et entrez le code suivant :
+  Ouvrez un fichier appelé <code>app.rb</code> et entrez le code
+  suivant :
 </p>
 
 <pre>
@@ -38,9 +39,9 @@
 </p>
 
 <p lang="fr">
-  Mais comme prévu, vous n'allez voir aucun résultat. Une app Syro peut être
-  appelée en lui passant le hash avec les variables CGI, essayons donc ça. 
-  Ajoutez le code suivant au fichier :
+  Mais comme prévu, vous n'allez voir aucun résultat. Une app Syro
+  peut être appelée en lui passant le hash avec les variables CGI,
+  essayons donc ça. Ajoutez le code suivant au fichier :
 </p>
 
 <pre>
@@ -57,7 +58,8 @@
 </p>
 
 <p lang="fr">
-  Si vous exécutez le code encore une fois, vous allez obtenir le résultat suivant :
+  Si vous exécutez le code encore une fois, vous allez obtenir le
+  résultat suivant :
 </p>
 
 <pre>
@@ -73,15 +75,16 @@
 </p>
 
 <p lang="fr">
-  Si vous êtes familiarisé avec Rack, vous allez reconnaître le résultat. 
-  Si ce n'est pas le cas, une lecture sur Rack pourra vous être utile plus tard.
+  Si vous êtes familiarisé avec Rack, vous allez reconnaître le
+  résultat. Si ce n'est pas le cas, une lecture sur Rack pourra
+  vous être utile plus tard.
 </p>
 
 <p lang="en">
   You can see that the body of the response contained the string
-  <code>"hello, world"</code>. That's because the block that was passed to
-  <code>get</code> was executed. When <code>get</code> is called,
-  it checks two things: first, it makes sure the
+  <code>"hello, world"</code>. That's because the block that was
+  passed to <code>get</code> was executed. When <code>get</code>
+  is called, it checks two things: first, it makes sure the
   <code>REQUEST_METHOD</code> is <code>"GET"</code>; then it checks
   <code>"PATH_INFO"</code> to see if we are at the end of the path.
   The terminal <code>"/"</code> is considered the end of the path,
@@ -91,16 +94,16 @@
 </p>
 
 <p lang="fr">
-  Vous pouvez constater que le corps de la réponse contenait la chaîne
-  <code>"hello, world"</code>. C'est parce que le bloc qui a été transmis à
-  <code>get</code> a été executé. Lorsque <code>get</code> est appelé,
-  il vérifie deux choses : d'abord, il s'assure que <code>REQUEST_METHOD</code> 
-  est bien <code>"GET"</code>; après il vérifie <code>"PATH_INFO"</code>
-  pour voir si l'on est bien à la fin du chemin.
-  Le terminal <code>"/"</code> est consideré la fin du chemin,
-  et comme <code>REQUEST_METHOD</code> a été définie sur <code>"GET"</code>
-  le bloc passé à <code>get</code> a été evalué. Enfin, la résponse a été
-  générée et retournée.
+  Vous pouvez constater que le corps de la réponse contenait la
+  chaîne <code>"hello, world"</code>. C'est parce que le bloc qui
+  a été transmis à <code>get</code> a été executé. Lorsque
+  <code>get</code> est appelé, il vérifie deux choses : d'abord,
+  il s'assure que <code>REQUEST_METHOD</code> est bien <code>"GET"</code>;
+  après il vérifie <code>"PATH_INFO"</code> pour voir si l'on est
+  bien à la fin du chemin. Le terminal <code>"/"</code> est consideré
+  la fin du chemin, et comme <code>REQUEST_METHOD</code> a été
+  définie sur <code>"GET"</code> le bloc passé à <code>get</code>
+  a été evalué. Enfin, la résponse a été générée et retournée.
 </p>
 
 <p lang="en">
@@ -109,8 +112,9 @@
 </p>
 
 <p lang="fr">
-  Nous verrons plus tard comment exécuter ce code avec un serveur web,
-  mais pour le moment c'est mieux de se familiariser avec les mécaniques sous-jacentes.
+  Nous verrons plus tard comment exécuter ce code avec un serveur
+  web, mais pour le moment c'est mieux de se familiariser avec les
+  mécaniques sous-jacentes.
 </p>
 
 <h2 lang="en">Exercise</h2>
@@ -124,9 +128,10 @@
 </p>
 
 <p lang="fr">
-  Changez la valeur de <code>REQUEST_METHOD</code> et exécutez le programme
-  à nouveau. Est-ce que ça marche comme attendu ? Changez la valeur de <code>PATH_INFO</code>,
-  exécutez-le à nouveau. Que s'est il passé ?
+  Changez la valeur de <code>REQUEST_METHOD</code> et exécutez le
+  programme à nouveau. Est-ce que ça marche comme attendu ? Changez
+  la valeur de <code>PATH_INFO</code>, exécutez-le à nouveau. Que
+  s'est il passé ?
 </p>
 
 <br>

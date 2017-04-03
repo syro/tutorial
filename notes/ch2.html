@@ -8,8 +8,9 @@
 </p>
 
 <p lang="fr">
-  Suivant la tradition de bibliothèques comme Cuba et Rum, Syro vous permet
-  de matcher des segments de chemin. Prenons cet exemple :
+  Suivant la tradition de bibliothèques comme Cuba et Rum, Syro
+  vous permet de matcher des segments de chemin. Prenons cet
+  exemple :
 </p>
 
 <pre>
@@ -27,8 +28,9 @@
 
 <p lang="en">
   Dans l'exemple du hash <code>env</code>, <code>foo</code>,
-  <code>bar</code> et <code>baz</code> sont ce qu'on appelle des segments.
-  Voyons comment on peut matcher ces segments dans notre app :
+  <code>bar</code> et <code>baz</code> sont ce qu'on appelle des
+  segments. Voyons comment on peut matcher ces segments dans notre
+  app :
 </p>
 
 <pre>
@@ -85,13 +87,14 @@
 </p>
 
 <p lang="fr">
-  Notez que nous utilisons <code>get</code> pour indiquer que nous ciblons
-  la méthode de requête <code>"GET"</code>, mais aussi qu'il ne reste pas
-  de segments à parcourir. Par exemple, ce premier appel à 
-  <code>get</code> ne déclenche pas l'exécution du bloc,
-  parce qu'à ce point le chemin contient encore les segments <code>"foo/bar/baz"</code>.
-  Ce n'est que quand les appels à <code>on</code> parcourent ces segments qu'on atteint
-  la fin du chemin, et le <code>get</code> imbriqué est vérifié.
+  Notez que nous utilisons <code>get</code> pour indiquer que nous
+  ciblons la méthode de requête <code>"GET"</code>, mais aussi qu'il
+  ne reste pas de segments à parcourir. Par exemple, ce premier
+  appel à <code>get</code> ne déclenche pas l'exécution du bloc,
+  parce qu'à ce point le chemin contient encore les segments
+  <code>"foo/bar/baz"</code>. Ce n'est que quand les appels à
+  <code>on</code> parcourent ces segments qu'on atteint la fin du
+  chemin, et le <code>get</code> imbriqué est vérifié.
 </p>
 
 <h2 lang="en">Exercise</h2>
@@ -105,9 +108,10 @@
 </p>
 
 <p lang="fr">
-  Changez la valeur de <code>PATH_INFO</code> et exécutez le programme à nouveau.
-  Est-ce que ça marche comme attendu ? Adaptez les appels à <code>on</code>
-  pour les faire matcher avec la nouvelle valeur de <code>PATH_INFO</code>.
+  Changez la valeur de <code>PATH_INFO</code> et exécutez le programme
+  à nouveau. Est-ce que ça marche comme attendu ? Adaptez les appels
+  à <code>on</code> pour les faire matcher avec la nouvelle valeur
+  de <code>PATH_INFO</code>.
 </p>
 
 <br>

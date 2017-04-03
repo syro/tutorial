@@ -13,8 +13,8 @@
 <p lang="fr">
   Syro supporte directement des matchers pour les méthodes de requête
   <code>get</code>, <code>put</code>, <code>head</code>,
-  <code>post</code>, <code>patch</code>, <code>delete</code>
-  et <code>options</code>.
+  <code>post</code>, <code>patch</code>, <code>delete</code> et
+  <code>options</code>.
 </p>
 
 <p lang="en">
@@ -92,9 +92,9 @@
 </p>
 
 <p lang="fr">
-  Comme expliqué dans le <a href="ch2.html">Chapitre 2</a>, on ne fait pas
-  que matcher le <code>REQUEST_METHOD</code>, mais on affirme aussi
-  qu'il ne reste aucun segment à matcher.
+  Comme expliqué dans le <a href="ch2.html">Chapitre 2</a>, on ne
+  fait pas que matcher le <code>REQUEST_METHOD</code>, mais on
+  affirme aussi qu'il ne reste aucun segment à matcher.
 </p>
 
 <p lang="en">
@@ -105,9 +105,10 @@
 </p>
 
 <p lang="fr">
-  Il existe plus des méthodes HTTP que celles traité par Syro. Si vous
-  en avez besoin, vous pouvez toujours utiliser <code>on</code>
-  pour matcher un booléen (plus d'infos dans le <a href="ch9.html">Chapitre 9</a>) :
+  Il existe plus des méthodes HTTP que celles traité par Syro. Si
+  vous en avez besoin, vous pouvez toujours utiliser <code>on</code>
+  pour matcher un booléen (plus d'infos dans le <a href="ch9.html">Chapitre
+  9</a>) :
 </p>
 
 <pre>
@@ -152,8 +153,8 @@
 </p>
 
 <p lang="fr">
-  Notez qu'on a dû appeler <code>root</code> pour être sûrs 
-  de ne pas avoir de segments supplémentaires dans le chemin.
+  Notez qu'on a dû appeler <code>root</code> pour être sûrs de ne
+  pas avoir de segments supplémentaires dans le chemin.
 </p>
 
 <h2 lang="en">Exercise</h2>
@@ -168,8 +169,8 @@
 
 <p lang="fr">
   Retirez l'appel à <code>root</code> mais laissez l'appel à
-  <code>res.text</code>. Avez-vous obtenu le même résultat ? Maintenant
-  modifiez <code>PATH_INFO</code>. Que s'est-il passé ?
+  <code>res.text</code>. Avez-vous obtenu le même résultat ?
+  Maintenant modifiez <code>PATH_INFO</code>. Que s'est-il passé ?
 </p>
 
 <br>

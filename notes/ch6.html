@@ -11,9 +11,10 @@
 </p>
 
 <p lang="fr">
-  Nous avons déjà mentionné que Syro peut capturer des segments du chemin,
-  mais comment au juste ? Dans ce chapitre nous allons examiner l'objet <code>path</code>
-  pour voir comment il garde le registre des chemins actuels et précédents.
+  Nous avons déjà mentionné que Syro peut capturer des segments du
+  chemin, mais comment au juste ? Dans ce chapitre nous allons
+  examiner l'objet <code>path</code> pour voir comment il garde le
+  registre des chemins actuels et précédents.
 </p>
 
 <p lang="en">
@@ -23,8 +24,9 @@
 </p>
 
 <p lang="fr">
-  L'exemple suivant construit la réponse de manière graduelle. C'est à dire, on utilise
-  <code>res.text</code> plus d'une fois et la réponse contient un tableau des appels successifs.
+  L'exemple suivant construit la réponse de manière graduelle. C'est
+  à dire, on utilise <code>res.text</code> plus d'une fois et la
+  réponse contient un tableau des appels successifs.
 </p>
 
 <pre>
@@ -76,13 +78,14 @@
 </p>
 
 <p lang="fr">
-  Quand on construisait la réponse, on a mis une barre verticale à l'endroit où
-  se rejoignent <code>path.prev</code> et <code>path.curr</code>.
-  Au fur et à mesure que des segments de chemin sont matchés, des parties de
-  <code>path.curr</code> sont déplacées à <code>path.prev</code>. Chaque appel
-  à <code>on</code> utilise la version actuelle du chemin (<code>path.curr</code>) 
-  et ignore le reste. C'est cela qui permet à Syro de matcher successivement
-  des segments avec des blocs imbriqués.
+  Quand on construisait la réponse, on a mis une barre verticale à
+  l'endroit où se rejoignent <code>path.prev</code> et
+  <code>path.curr</code>. Au fur et à mesure que des segments de
+  chemin sont matchés, des parties de <code>path.curr</code> sont
+  déplacées à <code>path.prev</code>. Chaque appel à <code>on</code>
+  utilise la version actuelle du chemin (<code>path.curr</code>)
+  et ignore le reste. C'est cela qui permet à Syro de matcher
+  successivement des segments avec des blocs imbriqués.
 </p>
 
 <h2 lang="en">Exercise</h2>

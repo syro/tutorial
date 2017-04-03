@@ -10,8 +10,8 @@
 
 <p lang="fr">
   Nous avons utilisé <code>res.text</code> dans tous les exemples,
-  et maintenant nous allons découvrir quelles autres méthodes nous pouvons
-  appeler dans <code>res</code>.
+  et maintenant nous allons découvrir quelles autres méthodes nous
+  pouvons appeler dans <code>res</code>.
 </p>
 
 <h2 lang="en">Status codes</h2>
@@ -25,8 +25,8 @@
 </p>
 
 <p lang="fr">
-  Nous pouvons obtenir ou mettre en place les codes des statuts
-  de la réponse en utilisant l'acceseur <code>res.status</code>:
+  Nous pouvons obtenir ou mettre en place les codes des statuts de
+  la réponse en utilisant l'acceseur <code>res.status</code>:
 </p>
 
 <pre>
@@ -73,8 +73,8 @@
 </p>  
 
 <p lang="fr">
-  Vous avez sûrement remarqué l'entête <code>Content-Type</code> inclu
-  dans toutes les réponses. Jusqu'ici, sa valeur a toujours
+  Vous avez sûrement remarqué l'entête <code>Content-Type</code>
+  inclu dans toutes les réponses. Jusqu'ici, sa valeur a toujours
   été <code>"text/plain"</code>.
 </p>  
 
@@ -85,7 +85,7 @@
 </p>
 
 <p lang="fr">  
-  La méthode <code>res.text</code> non seulement écrit le corps, 
+  La méthode <code>res.text</code> non seulement écrit le corps,
   mais configure en plus les entêtes de <code>"Content-Type"</code>
   et de <code>"Content-Length"</code>.
 </p>
@@ -95,7 +95,9 @@
 </p>
 
 <p lang="fr">  
-  Voici quelques méthodes alternatives pour écrire la réponse du corps</p>
+  Voici quelques méthodes alternatives pour écrire la réponse du
+  corps :
+</p>
 
 <pre>
   res.write <span>"Hello"</span>
@@ -107,8 +109,8 @@
 </p>
 
 <p lang="fr">
-  La méthode <code>res.write</code> n'altère pas
-  l'entête <code>"Content-Type"</code>.
+  La méthode <code>res.write</code> n'altère pas l'entête
+  <code>"Content-Type"</code>.
 </p>
 
 <pre>
@@ -121,8 +123,8 @@
 </p>
 
 <p lang="fr">
-  La méthode <code>res.html</code> configure l'entête <code>"Content-Type"</code>
-  à <code>"text/html"</code>.
+  La méthode <code>res.html</code> configure l'entête
+  <code>"Content-Type"</code> à <code>"text/html"</code>.
 </p>
 
 <pre>
@@ -135,8 +137,8 @@
 </p>
 
 <p lang="fr">
-  La méthode <code>res.json</code> configure l'entête <code>"Content-Type"</code>
- à <code>"application/json"</code>.
+  La méthode <code>res.json</code> configure l'entête
+  <code>"Content-Type"</code> à <code>"application/json"</code>.
 </p>
 
 <p lang="en">
@@ -149,10 +151,10 @@
 
 <p lang="fr">
   Notez que, mis appart l'écriture de la réponse du corps et la
-  configuration de la valeur pour l'entête Content-Type, aucun encodage
-  ou sérialisation n'aura lieu. Si vous voulez retourner une
-  réponse encodée JSON, assurez-vous d'encoder vous mêmes les objets
-  (ex. <code>res.json JSON.dump(...)</code>).
+  configuration de la valeur pour l'entête Content-Type, aucun
+  encodage ou sérialisation n'aura lieu. Si vous voulez retourner
+  une réponse encodée JSON, assurez-vous d'encoder vous mêmes les
+  objets (ex. <code>res.json JSON.dump(...)</code>).
 </p>
 
 <h2 lang="en">Headers</h2>
@@ -165,8 +167,8 @@
 </p>
 
 <p lang="fr">
-  Nous pouvons configurer des entêtes de réponse
-  avec le hash <code>res.headers</code> :
+  Nous pouvons configurer des entêtes de réponse avec le hash
+  <code>res.headers</code> :
 </p>
 
 <pre>
@@ -213,8 +215,8 @@
 </p>
 
 <p lang="fr">
-  Vous pouvez appeler <code>res.redirect</code> pour amener
-  le visiteur vers une URL différente :
+  Vous pouvez appeler <code>res.redirect</code> pour amener le
+  visiteur vers une URL différente :
 </p>
 
 <pre>
@@ -262,10 +264,10 @@
 </p>
 
 <p lang="fr">
-  Notre petite application retournera une redirection qui dira
-  au navigateur d'aller vers une URL différente. Bientôt, nous
-  serons capables de voir ce résultat dans le navigateur
-  et tout cela aura du sens.
+  Notre petite application retournera une redirection qui dira au
+  navigateur d'aller vers une URL différente. Bientôt, nous serons
+  capables de voir ce résultat dans le navigateur et tout cela aura
+  du sens.
 </p>
 
 <h2>Cookies</h2>
@@ -328,8 +330,8 @@
 
 <p lang="fr">
   Nous avons obtenu une redirection et un entête cookie. Maintenant
-  nous pouvons simuler ce que le navigateur ferait pour suivre
-  la redirection. Ajoutez le code ci-dessous :
+  nous pouvons simuler ce que le navigateur ferait pour suivre la
+  redirection. Ajoutez le code ci-dessous :
 </p>
 
 <pre>
