@@ -33,7 +33,7 @@ section nav {
   font-size: 80%;
   position: absolute;
   top: 1em;
-  right: calc(100% - (320px + 36rem));
+  right: 2rem;
 }
 
 section h1 {
