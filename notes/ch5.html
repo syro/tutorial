@@ -43,10 +43,19 @@
   env = {
     <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
     <span>"PATH_INFO"</span>      =&gt; <span>"/admin"</span>,
+    <span>"SCRIPT_NAME"</span> =&gt; <span>""</span>,
   }
 
   p App.call(env)
 </pre>
+
+<p lang="en">
+  When we use the <code>run</code> method, the <code>SCRIPT_NAME</code> environment variable needs to be present in our <code>env</code> hash.
+</p>
+
+<p lang="fr">
+Lorsque nous utilisons la méthode <code>run</code>, la variable d'environnement <code>SCRIPT_NAME</code> doit être présente dans notre hachage <code>env</code>.
+</p>
 
 <p lang="en">
   Output:
@@ -95,6 +104,7 @@
   env = {
     <span>"REQUEST_METHOD"</span> =&gt; <span>"GET"</span>,
     <span>"PATH_INFO"</span>      =&gt; <span>"/admin"</span>,
+    <span>"SCRIPT_NAME"</span> =&gt; <span>""</span>,
   }
 
   p App.call(env)
